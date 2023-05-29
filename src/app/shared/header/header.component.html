@@ -1,0 +1,18 @@
+<header class="d-flex flex-row align-items-center justify-content-between p-3 px-4 mb-3
+    bg-white border-bottom  shadow-sm">
+  <img src="/assets/images/DIDON'ART%20LOGO%20GOLD.png" alt="logo" class="logo" style="max-height: 70px;" routerLink="/">
+  <nav class="my-2 text-uppercase fs-4">
+    <a class="p-2" routerLink="/" routerLinkActive="active">Home</a>
+    <a class="p-2" routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a class="p-2" routerLink="/discount" routerLinkActive="active">Promotions</a>
+  </nav>
+  <div class="d-flex align-items-center">
+    <a routerLink="/basket" class="position-relative">
+      <span class="material-symbols-outlined">shopping_cart</span>
+    </a>
+    <ng-container>
+      <a routerLink="/user/login" class="btn btn-outline-secondary me-2">Login</a>
+      <a routerLink="/user/sign-up" class="btn btn-outline-secondary me-3">Sign up</a>
+    </ng-container>
+  </div>
+</header>
