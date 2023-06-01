@@ -30,5 +30,13 @@ export class LoginComponent {
     console.error('Login failed:', error);
     // Handle login failure, such as displaying an error message
   });
+  if (this.form.valid) {
+    console.log('Form Submitted!');
+    this.router.navigate(['/home']);
+  }
+  else {
+    console.log('Invalid Form!');
+    this.form.resetForm()
+  }
 }
 }

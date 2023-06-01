@@ -36,7 +36,7 @@ export class SignUpComponent {
       this.router.navigate(['login']);
     }
     else {
-      throw new Error("form is invalid");
+      this.form.resetForm()
     }
   }
 }
