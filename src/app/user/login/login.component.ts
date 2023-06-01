@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, ViewChild} from '@angular/core';
+import { Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {User} from "../../shared/models/user";
+import {NgForm} from "@angular/forms";
 
-class AccountService {
-}
+
 
 @Component({
   selector: 'app-login',
@@ -11,5 +12,23 @@ class AccountService {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor( private http: HttpClient, private router: Router ) {
+  }
+  @ViewChild('myForm') form: NgForm;
 
+  onSubmit() {
+  let user = new User()
+  user.email = this.form.value.personDetails.email;
+  user.password = this.form.value.personDetails.password;
+  this.http.post<any>('/api/login', { username: user.email, password: user.password }).subscribe(response => {
+    console.log('Login successful');
+    const token = response.headers.get('Authorization');
+    // Store the token in local storage
+    localStorage.setItem('token', token);
+    // You can redirect to another page or perform additional actions upon successful login
+  }, error => {
+    console.error('Login failed:', error);
+    // Handle login failure, such as displaying an error message
+  });
+}
 }
