@@ -18,6 +18,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
   exports: [
     HeaderComponent,
     LoadingSpinnerComponent,
+    NotFoundComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
