@@ -1,1 +1,27 @@
-<p>user-info works!</p>
+
+
+  <h3>First Name :</h3>
+    <div class="info" >{{userA.firstName}} </div>
+
+
+    <h3>Last Name : </h3>
+    <div class="info" >{{userA.lastName}}  </div>
+
+    <h3>Email : </h3>
+  <div class="info" >  {{userA.email}} </div>
+
+    <h3>Address : </h3>
+    <div class="info" > {{userA.address}}  </div>
+
+    <h3>Phone Number :</h3>
+    <div class="info" >  {{userA.phoneNumber}} </div>
+
+    <h3>Status :</h3>
+    <div class="info" > {{verif(userA.verified)}}
+  </div>
+  <button class="btn btn-primary"
+    (click)="GoToUpdate() "
+  >
+    <a class="p-2" routerLink="/user/update" routerLinkActive="active"> Update </a>
+  </button>
+

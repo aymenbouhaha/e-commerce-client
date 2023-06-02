@@ -6,11 +6,14 @@ import {DiscountRoutingModule} from "./discount-routing.module";
 
 
 @NgModule({
-  declarations: [
-    DiscountComponent
-  ],
-  imports: [
-    CommonModule,DiscountRoutingModule
-  ]
+    declarations: [
+        DiscountComponent
+    ],
+    exports: [
+        DiscountComponent
+    ],
+    imports: [
+        CommonModule, DiscountRoutingModule
+    ]
 })
 export class DiscountModule { }

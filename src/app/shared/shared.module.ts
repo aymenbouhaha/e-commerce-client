@@ -13,9 +13,11 @@ import {RouterModule} from "@angular/router";
     FooterComponent,
     NotFoundComponent
   ],
-  exports: [
-    HeaderComponent,
-  ],
+    exports: [
+        HeaderComponent,
+        NotFoundComponent,
+        FooterComponent,
+    ],
   imports: [
     CommonModule,
     RouterModule
