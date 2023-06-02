@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {Basket} from "../shared/models/basket";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  private baseUrl = '/api/basket';
+  private baseUrl = environment.apiUrl + 'basket';
   basket: Observable<Basket>;
   constructor(private http:HttpClient) { }
   getBasket(): Observable<Basket> {

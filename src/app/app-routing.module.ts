@@ -11,7 +11,7 @@ const routes : Routes= [
   {path : "basket", loadChildren : ()=> import ("./basket/basket.module").then(m=>m.BasketModule)},
   {path : "user", loadChildren : () => import("./user/user.module").then(m=>m.UserModule)},
   {path : "discount", loadChildren : ()=> import("./discount/discount.module").then(m=>m.DiscountModule)},
-  {path : "order" , loadChildren : ()=>import("./order/order.module")}
+  {path : "order" , loadChildren : ()=>import("./order/order.module").then(m=>m.OrderModule)},
 
 ]
 
