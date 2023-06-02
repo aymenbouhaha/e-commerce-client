@@ -1,0 +1,56 @@
+<div class="form_wrapper">
+  <div class="form_container">
+    <div class="title_container">
+      <h2>Update your info</h2>
+    </div>
+    <div class="row clearfix">
+      <div class="">
+        <form (ngSubmit)="OnSumbit(f)"  #f="ngForm" >
+
+          <div class="row clearfix">
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <label for="firstname">First Name </label> <br>
+                <input [ngModel]="userA.firstName" type="text" name="firstname" id="firstname"  />
+              </div>
+            </div>
+            <div class="col_half">
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                <label for="lastname">Last Name</label>         <br>
+                <input ngModel type="text" name="lastname" id="lastname" value="{{userA.lastName}}" required />
+              </div>
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <label for="address" >Address</label>             <br>
+              <input ngModel type="text"  name="address" id="address" value="{{userA.address}}" required>
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <label for="PhoneNumber" >Phone Number</label>            <br>
+              <input ngModel type="text"  name="phonenumber" id="PhoneNumber"  value="{{userA.phoneNumber}}" required >
+
+
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <label for="email" >E-mail</label>                <br>
+              <input ngModel type="email" name="email" id="email" value="{{userA.email}}" required />
+            </div>
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <label for="Password" >Password</label>            <br>
+              <input ngModel type="text"  name="Password" id="Password"  value="{{userA.password}}" required >
+
+            </div>
+          </div>
+          <div class="input_field checkbox_option">
+            <input type="checkbox" id="cb2">
+            <label for="cb2">I want to receive the newsletter</label>
+          </div>
+          <button type="submit"> submit</button>
+<!--          <a routerLink="/user/profile" class="btn btn-outline-secondary me-3">Confirm</a>
+  -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
