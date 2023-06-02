@@ -1,6 +1,9 @@
 <div class="product-item">
   <div class="image-container">
-    <img src="assets/images/first.png" alt="">
+    <img *ngIf="product.images.length>0"
+         [src]="product.images[0]"
+         alt="">
+    <img *ngIf="product.images.length<=0" src="assets/images/first.png" alt="">
   </div>
   <div class="product-infos">
     <div class="name-price">
@@ -18,6 +21,8 @@
     </div>
   </div>
 </div>
+<!--         [src]="sanitize('data:'+product.images[0].type+';base64, '+_arrayBufferToBase64(product.images[0].data))"-->
+
 
 
 

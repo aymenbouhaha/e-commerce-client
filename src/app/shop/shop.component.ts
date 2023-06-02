@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../shared/models/product/product";
 import {ShopService} from "./shop.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ShopBackEndService} from "./shop-back-end.service";
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +13,9 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private productService : ShopService,
-    private activatedRoute : ActivatedRoute
+    private productBackEndService : ShopBackEndService,
+    private activatedRoute : ActivatedRoute,
+    private router : Router,
   ) { }
 
   products : Product[]
@@ -22,10 +25,10 @@ export class ShopComponent implements OnInit {
     this.loading=true
     this.activatedRoute.queryParams.subscribe(
       (params)=>{
-        console.log(params)
-        this.productService.getProducts(params.page,params.category).subscribe(
+        this.productBackEndService.getProducts(params.page,params.category).subscribe(
           (products)=>{
             this.products=products
+            this.productService.setProducts(products)
             this.loading=false
           },
           error => {
@@ -36,4 +39,7 @@ export class ShopComponent implements OnInit {
     )
   }
 
+  navigateToProductDetails(product: Product) {
+      this.router.navigate(["product",product.id],{relativeTo : this.activatedRoute})
+  }
 }

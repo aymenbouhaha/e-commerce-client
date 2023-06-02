@@ -1,8 +1,7 @@
 import {Category} from "../categroy";
 import {Discount} from "../discount";
-import {SafeUrl} from "@angular/platform-browser";
 
-export class Product {
+export interface ProductInterface{
 
   id : number
   name : string
@@ -10,6 +9,15 @@ export class Product {
   itemsNumber : number
   description : string
   category : Category
-  images : SafeUrl[]
+  images : ImageInterface[]
   discount : Discount
+
+}
+
+export interface ImageInterface {
+  id : number
+  name: string;
+  type: string;
+  data: {type : string , data : Buffer};
+
 }
