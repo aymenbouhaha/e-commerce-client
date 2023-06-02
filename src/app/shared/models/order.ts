@@ -1,20 +1,16 @@
+import {User} from "./user";
 
-export interface OrderToCreate {
+export class Order{
   basketId: string;
-  deliveryMethodId: number;
+  id: number;
+  state: string;
+  date:Date;
+  userId: User;
+  orderItems: OrderItem[];
+  total: number;
+
 }
 
-export interface Order {
-  id: number;
-  buyerEmail: string;
-  orderDate: string;
-  deliveryMethod: string;
-  shippingPrice: number;
-  orderItems: OrderItem[];
-  subtotal: number;
-  total: number;
-  status: string;
-}
 
 export interface OrderItem {
   productId: number;
