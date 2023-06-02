@@ -8,7 +8,7 @@ import {UserInfoComponent} from "./user/user-info/user-info.component";
 import {OrderComponent} from "./order/order.component";
 
 const routes : Routes= [
-  {path : "" ,         component : HomeComponent},
+  {path : "" , component : HomeComponent},
   {path : "not-found", component: NotFoundComponent},
   {path : "footer",    component: FooterComponent},
   {path : "userInfo",    component: UserInfoComponent},

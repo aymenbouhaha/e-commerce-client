@@ -43,7 +43,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
-    this.user.next(null)
+    this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
   }
 

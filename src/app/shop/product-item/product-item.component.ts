@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Product} from "../../shared/models/product";
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../shared/models/product/product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BasketService} from "../../basket/basket.service";
