@@ -8,6 +8,7 @@ import {OrderModule} from "./order/order.module";
 import {DiscountModule} from "./discount/discount.module";
 import {UserModule} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {SharedModule} from "./shared/shared.module";
     DiscountModule,
     UserModule,
     SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
