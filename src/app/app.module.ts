@@ -24,7 +24,7 @@ import {FormsModule} from "@angular/forms";
     DiscountModule,
     UserModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
     FormsModule
   ],
   providers: [

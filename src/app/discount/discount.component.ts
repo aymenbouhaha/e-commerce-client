@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../shared/models/product";
+import {Product} from "../shared/models/product/product";
 
 @Component({
   selector: 'app-discount',
@@ -9,7 +9,7 @@ import {Product} from "../shared/models/product";
 export class DiscountComponent implements OnInit {
   products : Product[]
   loading : boolean
-  product : Product =new Product("shampoing","shampoingmango",0)
+  product : Product =new Product()
   constructor() { }
   ngOnInit(): void {
   this.products.push(this.product) ;
