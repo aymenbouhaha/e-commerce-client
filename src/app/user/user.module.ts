@@ -6,6 +6,7 @@ import {UserRoutingModule} from "./user-routing.module";
 import { UserInfoComponent } from './user-info/user-info.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {UserUpdateComponent} from "./user-update/user-update.component";
 
 
 
@@ -13,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
   declarations: [
     LoginComponent,
     SignUpComponent,
+    UserUpdateComponent,
     UserInfoComponent
   ],
   imports: [

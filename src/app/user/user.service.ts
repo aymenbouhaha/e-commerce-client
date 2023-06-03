@@ -27,7 +27,16 @@ export class UserService {
                (response)=> {
                  const user = new User(response.id,response.firstName,response.lastName,response.address,response.email,response.phoneNumber,response.role,response.verified)
                  this.user.next(user)
+                 console.log(user)
                  localStorage.setItem("token",response.token)
+                 localStorage.setItem("firsname" , user.firstName)
+                 localStorage.setItem("lastname" , user.lastName)
+                 localStorage.setItem("address" , user.address)
+                 localStorage.setItem("email" , user.email)
+                 localStorage.setItem("phonenumber" , user.phoneNumber)
+
+
+
                }
              )
          )

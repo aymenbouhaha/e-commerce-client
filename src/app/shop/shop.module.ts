@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
+import {AddProductComponent} from "./add-product/add-product.component";
 
 
 

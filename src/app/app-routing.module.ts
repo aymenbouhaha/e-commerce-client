@@ -6,6 +6,8 @@ import {NotFoundComponent} from "./shared/not-found/not-found.component";
 import {FooterComponent} from "./shared/footer/footer.component";
 import {UserInfoComponent} from "./user/user-info/user-info.component";
 import {OrderComponent} from "./order/order.component";
+import {LoginComponent} from "./user/login/login.component";
+import {AddProductComponent} from "./shop/add-product/add-product.component";
 
 const routes : Routes= [
   {path : "" , component : HomeComponent},

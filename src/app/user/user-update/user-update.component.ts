@@ -3,6 +3,9 @@ import {UserInfoComponent} from "../user-info/user-info.component";
 import {User} from "../../shared/models/user";
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {UserService} from "../user.service";
+import {take} from "rxjs";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-update',
@@ -11,9 +14,14 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserUpdateComponent implements OnInit {
   public userA :User = new User(1,"Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","96584693","aaaaeeee",true) ;
-  constructor( private http : HttpClient) { }
+  constructor( private loginUser: UserService,private http : HttpClient ,private router:Router) { }
 
+  user:User
   ngOnInit(): void {
+  this.loginUser.user.subscribe(
+    (user)=>{
+    }
+  )
   }
   OnSumbit(form : NgForm) {
 /*
@@ -25,6 +33,7 @@ export class UserUpdateComponent implements OnInit {
     this.userA.password=form.value.Password ;
     console.log(this.userA) ;
   */
+
    this.http.patch('http://localhost:3000/user/update',
      {
        "firstName" : form.value.firstname ,
@@ -36,7 +45,20 @@ export class UserUpdateComponent implements OnInit {
      }
    ).subscribe
     (
-      responseData => {console.log(responseData) ;  },error => console.log(error)
+      responseData => {console.log(responseData) ;
+        this.router.navigate(["/profile"])
+       /*
+        this.user.firstName=form.value.firstname ;
+        this.user.lastName=form.value.lastname ;
+        this.user.address=form.value.address ;
+        this.user.email=form.value.email ;
+        this.user.phoneNumber=form.value.phonenumber ;
+        this.loginUser.user.next(this.user) ;
+        console.log(this.user)
+
+
+        */
+        },error => console.log(error)
     ) ;
 
 
