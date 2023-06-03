@@ -1,9 +1,41 @@
 import { Injectable } from '@angular/core';
+import {Product} from "../shared/models/product/product";
+import {BasketService} from "../basket/basket.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  constructor() { }
+
+  products : Product[] =[]
+
+  constructor(
+    private basketService : BasketService
+  ) { }
+
+
+  setProducts(product : Product []){
+    this.products=product
+  }
+
+  addToBasket(product,itemsNumber){
+    this.basketService.addToBasket(product,itemsNumber)
+  }
+
+  getProductById(id : number){
+    return this.products.find(
+      (product)=>{
+        return product.id==id
+    })
+  }
+
+  getProductsByCategory(categoryName : string){
+    return this.products.filter(
+      (product)=> product.category.name === categoryName
+    )
+  }
+
+
 }

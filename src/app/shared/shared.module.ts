@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule} from "@angular/router";
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 
@@ -11,13 +12,15 @@ import {RouterModule} from "@angular/router";
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoadingSpinnerComponent,
   ],
-    exports: [
-        HeaderComponent,
-        NotFoundComponent,
-        FooterComponent,
-    ],
+  exports: [
+    HeaderComponent,
+    LoadingSpinnerComponent,
+    NotFoundComponent,
+    FooterComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule

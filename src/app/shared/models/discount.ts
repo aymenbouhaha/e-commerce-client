@@ -1,9 +1,14 @@
-export interface Discount{
-id: number;
-startDate: Date;
-endDate: Date;
-value: number;
-productId: number;
-}
-export class Discount implements Discount{
+import {Product} from "./product/product";
+
+export class Discount {
+
+  id : number
+
+  startDate : Date
+
+  endDate : Date
+
+  value : number
+
+  product : Product
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import { Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
+import {UserService} from "../user.service";
 
 
-class AccountService {
-}
 
 @Component({
   selector: 'app-login',
@@ -10,5 +12,19 @@ class AccountService {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor( private http: HttpClient, private userService : UserService) {
+  }
+  @ViewChild('myForm') form: NgForm;
+
+  onSubmit() {
+  const email = this.form.value.personDetails.email;
+  const password = this.form.value.personDetails.password;
+  this.userService.login(email,password).subscribe(
+    (response)=>{
+        console.log(response)
+    },
+    error => console.log("failed"+error)
+  )
+  }
 
 }

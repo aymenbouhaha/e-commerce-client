@@ -1,71 +1,24 @@
-<!--
-<div class="d-flex justify-content-center mt-5">
-  <div class="col-3">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="text-center mb-4">
-        <h1 class="mb-3">Login</h1>
-      </div>
+<div class="form">
+  <h2 id="login">Login</h2>
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
 
-      <app-text-input [formControl]="loginForm.controls['email']" [label]="'Email Address'"></app-text-input>
-      <app-text-input [formControl]="loginForm.controls['password']" [label]="'Password'" [type]="'password'"></app-text-input>
+    <div ngModelGroup="personDetails" #personalDetail="ngModelGroup">
 
-      <div class="d-grid">
-        <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
-      </div>
- </form>
-  </div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email.."
+             name="email" ngModel required email>
 
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Your password.."
+             name="password" ngModel required #password="ngModel">
+    </div>
+    <div>
+      <small *ngIf="password.invalid && password.touched">password is a required field</small>
+    </div>
+
+    <br><br>
+    <input type="submit" value="Submit" id="btn">
+    <a routerLink="/sign-up">I don't have an account !</a>
+  </form>
 </div>
--->
-
-<!--
-<body>
-<div class="title"><h1>Update your info</h1></div>
-<div class="container">
-  <div class="right">  </div>
-  <div class="left">
-    <form class="formBox">
-      <div>
-        <label for="firstname">First Name </label>
-        <br>
-        <input type="text" id="firstname" value="{{userA.firstName}}">
-      </div>
-      <div>
-        <label for="lastname">Last Name</label>         <br>
-        <input type="text" id="lastname" value="{{userA.lastName}}">
-      </div>
-      <div>
-        <label for="address" >Address</label>             <br>
-        <input type="text" id="address" value="{{userA.address}}">
-      </div>
-      <div>
-        <label for="email" >E-mail</label>                <br>
-        <input type="email" id="email" value="{{userA.email}}">
-      </div>
-      <div>
-        <label for="PhoneNumber" >Phone Number</label>            <br>
-        <input type="number" id="PhoneNumber" value="{{userA.PhoneNumber}}">
-      </div>
-      <button > Update</button>
-    </form>
-  </div>
-</div>
-
-
-</body>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
