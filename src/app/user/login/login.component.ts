@@ -12,7 +12,7 @@ import {UserService} from "../user.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor( private http: HttpClient, private userService : UserService) {
+  constructor( private http: HttpClient, private userService : UserService ,private router : Router) {
   }
   @ViewChild('myForm') form: NgForm;
 
@@ -21,7 +21,8 @@ export class LoginComponent {
   const password = this.form.value.personDetails.password;
   this.userService.login(email,password).subscribe(
     (response)=>{
-        console.log(response)
+        console.log(response) ,
+          this.router.navigate(['/update'])
     },
     error => console.log("failed"+error)
   )

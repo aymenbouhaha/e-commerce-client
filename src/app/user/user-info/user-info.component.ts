@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
 import {Route, Router, Routes} from "@angular/router";
 import {Subject} from "rxjs";
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-user-info',
@@ -10,9 +11,16 @@ import {Subject} from "rxjs";
 })
 export class UserInfoComponent implements OnInit {
   router : Router ;
-  public userA :User = new User(1,"Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","+21696584693","aaaaeeee",true) ;
-
-  constructor() { } ;
+  public userA :User = new User(1,localStorage.getItem("firstname"),
+    localStorage.getItem("lastname")     ,
+    localStorage.getItem("address"),
+    localStorage.getItem("email"),
+    localStorage.getItem("phonenumber"),
+    "client",
+    true) ;
+  mail=localStorage.getItem("usermail")
+  constructor(private userservice:UserService) { } ;
+  user:User
    verif(status : boolean) : string {
     if(status)
       return "Verified" ;
@@ -24,6 +32,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.mail) ;
+
   }
 
 }
