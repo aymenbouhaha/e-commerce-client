@@ -8,36 +8,26 @@
       </h2>
       <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          <li class="categories-item">Statuette</li>
-          <li class="categories-item">Vases</li>
-          <li class="categories-item">Miroir</li>
-          <li class="categories-item">Plateux</li>
-          <li class="categories-item">Bouquets</li>
-          <li class="categories-item">Vaiselles</li>
-          <li class="categories-item">Rangements</li>
-          <li class="categories-item">Plantes</li>
+          <li class="categories-item" (click)="navigateByCategory(category.name)" *ngFor="let category of categories">{{category.name}}</li>
         </div>
       </div>
     </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-          Prix
-        </button>
-      </h2>
-      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <input type="range" class="form-range" id="customRange1">
-        </div>
-      </div>
-    </div>
+<!--    <div class="accordion-item">-->
+<!--      <h2 class="accordion-header">-->
+<!--        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">-->
+<!--          Prix-->
+<!--        </button>-->
+<!--      </h2>-->
+<!--      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">-->
+<!--        <div class="accordion-body">-->
+<!--          <input type="range" class="form-range" id="customRange1">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
   <div class="shop-content">
     <div class="paginator">
-      <div class="page-number">1</div>
-      <div class="page-number">2</div>
-      <div class="page-number">3</div>
-      <div class="page-number">4</div>
+      <div class="page-number" *ngFor="let i of range(1,pageNumber)" (click)="navigateByPage(i)">{{i}}</div>
     </div>
     <div class="text-center" *ngIf="loading">
       <div class="spinner-border" role="status">

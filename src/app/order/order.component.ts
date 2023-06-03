@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from "./order.service";
-import {Order} from "../shared/models/order";
+import {Order} from "../shared/models/order/order";
 
 @Component({
   selector: 'app-order',
@@ -17,9 +17,11 @@ export class OrderComponent implements OnInit {
 
   }
   getOrders() {
-    this.orderService.getOrdersForUser().subscribe({
-      next: orders => this.orders = orders
-    })
+    this.orderService.getOrders().subscribe(
+      (orders)=>{
+        console.log(orders)
+      }
+    )
   }
 
 }

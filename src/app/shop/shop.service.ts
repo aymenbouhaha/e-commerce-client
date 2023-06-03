@@ -20,9 +20,7 @@ export class ShopService {
     this.products=product
   }
 
-  addToBasket(product,itemsNumber){
-    this.basketService.addToBasket(product,itemsNumber)
-  }
+
 
   getProductById(id : number){
     return this.products.find(
@@ -36,6 +34,9 @@ export class ShopService {
       (product)=> product.category.name === categoryName
     )
   }
+
+
+
 
 
 }

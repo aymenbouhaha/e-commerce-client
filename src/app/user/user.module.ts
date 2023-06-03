@@ -18,7 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule, HttpClientModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class UserModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BasketService} from "./basket.service";
 import {Basket} from "../shared/models/basket/basket";
+import {OrderService} from "../order/order.service";
 
 @Component({
   selector: 'app-basket',
@@ -9,7 +10,10 @@ import {Basket} from "../shared/models/basket/basket";
 })
 export class BasketComponent implements OnInit {
 
-  constructor(private basketService: BasketService) {
+  constructor(
+    private basketService: BasketService,
+    private orderService : OrderService
+  ) {
   }
 
 
@@ -69,16 +73,20 @@ export class BasketComponent implements OnInit {
     this.basketService.removeItemFromBasket(productId)
   }
 
-  // removeBasketItem(item: any) {
-  // this.basketService.removeItemFromBasket(item.id).subscribe(
-  //   basket=> {
-  //     console.log('item romved successfully');
-  //   },
-  //   error => {
-  //     console.error('Failed to remove item from basket:', error);
-  //   }
-  // );
-  // }
+  makeOrder(){
+    if (this.basket.basketProduct.length>0){
+      const order: {id: number , itemsNumber : number}[]=[]
+        for (let proudctToOrder of this.basket.basketProduct){
+          order.push({
+            id : proudctToOrder.product.id,
+            itemsNumber : proudctToOrder.itemsNumber
+          })
+        }
+        this.orderService.makeOrder(order)
+    }else {
+      console.log("haha")
+    }
+  }
 
 
 

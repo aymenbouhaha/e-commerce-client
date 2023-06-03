@@ -33,7 +33,7 @@ export class ShopBackEndService {
 
 
   decodeImageUrl(type: string,buffer : any){
-    return this.sanitize('data:'+type+';base64, '+this._arrayBufferToBase64(Buffer))
+    return this.sanitize('data:'+type+';base64, '+this._arrayBufferToBase64(buffer))
   }
 
   getProducts(page? : number,category? : string){
