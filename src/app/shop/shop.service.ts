@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Product} from "../shared/models/product/product";
+import {BasketService} from "../basket/basket.service";
 
 
 @Injectable({
@@ -11,11 +12,16 @@ export class ShopService {
   products : Product[] =[]
 
   constructor(
+    private basketService : BasketService
   ) { }
 
 
   setProducts(product : Product []){
     this.products=product
+  }
+
+  addToBasket(product,itemsNumber){
+    this.basketService.addToBasket(product,itemsNumber)
   }
 
   getProductById(id : number){

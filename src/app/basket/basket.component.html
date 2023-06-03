@@ -1,89 +1,53 @@
-<!-- ============== SECTION PAGETOP ============== -->
-<section class="bg-primary padding-y-sm">
-  <div class="container">
-    <ol class="breadcrumb ondark mb-0">
-      <li class="breadcrumb-item"> <a routerLink="/">Home</a>  </li>
-      <li class="breadcrumb-item active"> Shopping cart  </li>
-    </ol>
-  </div> <!-- container //  -->
-</section>
-<!-- ============== SECTION PAGETOP END// ============== -->
-
-<section class="padding-y bg-light">
+<section class="padding-y bg-light mt-5">
   <div class="container">
 
-    <!-- =================== COMPONENT CART+SUMMARY ====================== -->
     <div class="row">
-      <div class="col-lg-9">
+      <div class="col-lg-7">
+        <h5 class="mb-3">Continue shopping</h5>
+        <hr>
 
-        <div class="card">
-          <div class="content-body">
-            <h4 class="card-title mb-4">Your shopping cart</h4>
-
-            <div *ngFor="let item of basket.items ">
-            <article class="row gy-3 mb-4">
-              <div class="col-lg-5">
-                <figure class="itemside me-lg-5">
-                  <div class="aside"><img src="{{item.pictureUrl}}" class="img-sm img-thumbnail"></div>
-                  <figcaption class="info">
-                    <a href="#" class="title">{{item.productName}}</a>
-                    <p class="text-muted"> {{item.brand}}</p>
-                  </figcaption>
-                </figure>
-              </div>
-              <div class="col-auto">
-                <label>Number of products </label>
-                <input id="occurrence" name="occurrence" type="number" style="width: 100px" class="form-check-input" >
-              </div>
-              <div class="col-lg-2 col-sm-4 col-6">
-                <div class="price-wrap lh-sm">
-                  <var class="price h6">{{getpricePerItem(item)}}</var>  <br>
-                  <small class="text-muted"> {{item.price}} / per item </small>
-                </div> <!-- price-wrap .// -->
-              </div>
-              <div class="col-lg col-sm-4">
-                <div class="float-lg-end">
-                  <button ng-click="removeBasketItem(item)"  class="btn btn-light text-danger"> Remove</button>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <p class="mb-1">Shopping cart</p>
+            <p class="mb-0">You have {{itemsCount}} items in your cart</p>
+          </div>
+        </div>
+        <app-loading-spinner *ngIf="basketLoading"></app-loading-spinner>
+        <div class="card mb-3" *ngIf="!basketLoading">
+          <div class="card-body" *ngFor="let basketProduct of basket.basketProduct" >
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-row align-items-center">
+                <div>
+                  <img
+                    [src]="basketProduct.product.images[0] ?? imagePlaceHolder "
+                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                </div>
+                <div class="ms-3">
+                  <h5>{{basketProduct.product.name}}</h5>
+                  <p class="small mb-0">{{basketProduct.product.description}}</p>
                 </div>
               </div>
-            </article>
-            </div><!-- row.// -->
+              <div class="d-flex flex-row align-items-center">
+                <div style="width: 50px;">
+                  <h5 class="fw-normal mb-0">{{basketProduct.itemsNumber}}</h5>
+                </div>
+                <div style="width: 80px;">
+                  <h5 class="mb-0">{{basketProduct.product.price * basketProduct.itemsNumber}} TND</h5>
+                </div>
+                <a style="color: #cecece;" (click)="removeFromBasket(basketProduct.product.id)"><img src="assets/images/trash.svg"></a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          </div> <!-- card-body .// -->
 
-          <div class="content-body border-top">
-            <p><i class="me-2 text-muted fa-lg fa fa-truck"></i> Delivery within 1 week</p>
-            <p class="text-muted">Introducing our exquisite basket, crafted with love and attention to detail. This charming piece is designed to add a touch of elegance to any space. Made from durable materials, it exudes both beauty and functionality. Whether you use it for storing essentials, organizing trinkets, or displaying decorative items, our basket is a versatile addition to your home. Embrace its timeless appeal and elevate your interior with this small yet captivating treasure.</p>
-          </div> <!-- card-body.// -->
-
-        </div> <!-- card.// -->
-
-      </div> <!-- col.// -->
+      </div>
       <aside class="col-lg-3">
-
-        <div class="card mb-3">
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label class="form-label">Have coupon?</label>
-                <div class="input-group">
-                  <input type="text" class="form-control" name="" placeholder="Coupon code">
-                  <button class="btn btn-light">Apply</button>
-                </div>
-              </div>
-            </form>
-          </div> <!-- card-body.// -->
-        </div> <!-- card.// -->
-
         <div class="card">
           <div class="card-body">
             <dl class="dlist-align">
               <dt>Total price:</dt>
-              <dd class="text-end"> {{total()}} TND</dd>
-            </dl>
-            <dl class="dlist-align">
-              <dt>Discount:</dt>
-              <dd class="text-end text-success">discount <!-- you need to add here the discount price--> </dd>
+              <dd class="text-end"> {{total}} TND</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Delivery :</dt>
@@ -92,7 +56,7 @@
             <hr>
             <dl class="dlist-align">
               <dt>Total:</dt>
-              <dd class="text-end text-dark h5"> <!--prix final ici --> DT </dd>
+              <dd class="text-end text-dark h5"> {{total+7}} TND </dd>
             </dl>
 
             <div class="d-grid gap-2 my-3">
@@ -102,13 +66,12 @@
           </div> <!-- card-body.// -->
         </div> <!-- card.// -->
 
-      </aside> <!-- col.// -->
+      </aside>
 
-    </div> <!-- row.// -->
-    <!-- =================== COMPONENT 1 CART+SUMMARY .//END  ====================== -->
+    </div>
 
     <br><br>
 
-  </div> <!-- container .//  -->
+  </div>
 </section>
 

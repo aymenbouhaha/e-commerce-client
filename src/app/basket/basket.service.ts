@@ -1,36 +1,100 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {Basket} from "../shared/models/basket";
+import {map,  Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {Basket, BasketInterface} from "../shared/models/basket/basket";
+import {ShopBackEndService} from "../shop/shop-back-end.service";
+import {BasketProduct} from "../shared/models/basket/basket-product";
+import {Product} from "../shared/models/product/product";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  private baseUrl = environment.apiUrl + 'basket';
-  basket: Observable<Basket>;
-  constructor(private http:HttpClient) { }
-  getBasket(): Observable<Basket> {
-    return this.http.get<Basket>(`${this.baseUrl}`);
-  }
-  decreaseQuantity(item: any) {
-    if (item.quantity > 1) {
-      item.quantity--;
-    }
+
+  basket : Basket
+
+  basketChanged = new Subject<Basket>()
+
+  private baseUrl = "http://localhost:3000/basket";
+  constructor(private http:HttpClient, private shopService : ShopBackEndService) {
+
   }
 
-  increaseQuantity(item: any) {
-    item.quantity++;
+
+  getBasket(){
+    return this.http.get<BasketInterface>(`${this.baseUrl}`)
+      .pipe<Basket>(
+        map(
+          (basket)=>{
+            console.log(basket)
+            const basketInfos : BasketProduct[]=basket.basketProduct.map(
+              (basketProductInterface)=>{
+                const product = basketProductInterface.product
+                const basketProduct : BasketProduct = new BasketProduct()
+                basketProduct.product={
+                  ...product,
+                  images : product.images ? product.images.map((image)=> this.shopService.decodeImageUrl(image.type,image.data.data)) : []
+                }
+                basketProduct.itemsNumber=basketProductInterface.itemsNumber
+                return basketProduct
+              }
+            )
+            const newBasket = new Basket()
+            newBasket.id =basket.id
+            newBasket.basketProduct=basketInfos
+            return newBasket
+          }
+        ),
+      );
   }
 
-  updateBasket(basket: Basket): Observable<Basket> {
-    return this.http.put<Basket>(`${this.baseUrl}`, basket);
+  setBasket(basket : Basket){
+    this.basket=basket
   }
-  removeItemFromBasket(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+
+  deleteFrom(productId){
+    const productIndex=this.basket.basketProduct.findIndex(
+      (basketProduct)=>{
+        return basketProduct.product.id==productId
+      }
+    )
+    this.basket.basketProduct.splice(productIndex,1)
+    this.basketChanged.next(this.basket)
   }
-  getPricePerItem(item: any,occurrence:number): number {
-    return item.price*occurrence;
+
+  addToStatic(product,itemsNumber , id : number){
+    this.basket.basketProduct.push({
+      product : product,
+      itemsNumber :itemsNumber,
+      id : id
+    })
   }
+
+
+  removeItemFromBasket(productId: number) {
+    return this.http.delete(this.baseUrl+"/delete/"+productId)
+      .subscribe(
+        ()=>{
+          console.log("delete Success")
+          this.deleteFrom(productId)
+        },
+        error => {}
+      );
+  }
+
+  addToBasket(product: Product,itemsNumber :number){
+    return this.http.post(this.baseUrl+"/add",{
+        id : product.id,
+        itemsNumber : itemsNumber
+      } )
+      .subscribe(
+        (response)=>{
+          const id = response["id"]
+          console.log("success")
+          this.addToStatic(product,itemsNumber,id)
+        },
+        error => console.log("Failed" , error)
+      )
+  }
+
 }

@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import { Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {User} from "../../shared/models/user";
 import {NgForm} from "@angular/forms";
+import {UserService} from "../user.service";
 
 
 
@@ -12,31 +12,19 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor( private http: HttpClient, private router: Router ) {
+  constructor( private http: HttpClient, private userService : UserService) {
   }
   @ViewChild('myForm') form: NgForm;
 
   onSubmit() {
-  let user = new User()
-  user.email = this.form.value.personDetails.email;
-  user.password = this.form.value.personDetails.password;
-  this.http.post<any>('/api/login', { username: user.email, password: user.password }).subscribe(response => {
-    console.log('Login successful');
-    const token = response.headers.get('Authorization');
-    // Store the token in local storage
-    localStorage.setItem('token', token);
-    // You can redirect to another page or perform additional actions upon successful login
-  }, error => {
-    console.error('Login failed:', error);
-    // Handle login failure, such as displaying an error message
-  });
-  if (this.form.valid) {
-    console.log('Form Submitted!');
-    this.router.navigate(['/home']);
+  const email = this.form.value.personDetails.email;
+  const password = this.form.value.personDetails.password;
+  this.userService.login(email,password).subscribe(
+    (response)=>{
+        console.log(response)
+    },
+    error => console.log("failed"+error)
+  )
   }
-  else {
-    console.log('Invalid Form!');
-    this.form.resetForm()
-  }
-}
+
 }

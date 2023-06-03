@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../environments/environment";
 import {Order} from "../shared/models/order";
 import {HttpClient} from "@angular/common/http";
 
@@ -7,13 +6,26 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class OrderService {
-  baseUrl = environment.apiUrl;
+
+
+
+
+  private baseUrl = "http://localhost:3000/order"
 
   constructor(private http: HttpClient) { }
+
+
+
+
   getOrdersForUser() {
     return this.http.get<Order[]>(this.baseUrl + 'orders');
   }
   getOrderDetailed(id: number) {
     return this.http.get<Order>(this.baseUrl + 'orders/' + id);
   }
+
+
+
+
+
 }

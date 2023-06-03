@@ -31,6 +31,11 @@ export class ShopBackEndService {
     return window.btoa( binary );
   }
 
+
+  decodeImageUrl(type: string,buffer : any){
+    return this.sanitize('data:'+type+';base64, '+this._arrayBufferToBase64(Buffer))
+  }
+
   getProducts(page? : number,category? : string){
     let params =new HttpParams()
     if (page){

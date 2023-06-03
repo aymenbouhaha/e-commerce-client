@@ -1,5 +1,5 @@
 <div class="product-item">
-  <div class="image-container">
+  <div class="image-container" (click)="navigateToProductDetails(product)">
     <img *ngIf="product.images.length>0"
          [src]="product.images[0]"
          alt="">
@@ -16,7 +16,7 @@
       {{product.description}}
     </div>
     <div class="product-card-footer">
-      <div class="add-to-cart">Ajouter Au Panier</div>
+      <div class="add-to-cart" (click)="addToBasket()">Ajouter Au Panier</div>
       <div class="discount">15%</div>
     </div>
   </div>
