@@ -1,27 +1,77 @@
+<div class="container">
+  <div class="main-body">
 
 
-  <h3>First Name :</h3>
-    <div class="info" >{{userA.firstName}} </div>
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+              <div class="mt-3">
+                <h4>{{userA.firstName}}</h4>
+                <p class="text-secondary mb-1">Client</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-    <h3>Last Name : </h3>
-    <div class="info" >{{userA.lastName}}  </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userA.firstName}}
+                {{userA.lastName}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userA.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userA.phoneNumber}}
+              </div>
+            </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Address</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{userA.address}}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+             <a class="btn btn-outline-secondary me-2" routerLink="/user/update" routerLinkActive="active"> Update </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <h3>Email : </h3>
-  <div class="info" >  {{userA.email}} </div>
 
-    <h3>Address : </h3>
-    <div class="info" > {{userA.address}}  </div>
 
-    <h3>Phone Number :</h3>
-    <div class="info" >  {{userA.phoneNumber}} </div>
 
-    <h3>Status :</h3>
-    <div class="info" > {{verif(userA.verified)}}
+    </div>
+
   </div>
-  <button class="btn btn-primary"
-    (click)="GoToUpdate() "
-  >
-    <a class="p-2" routerLink="/user/update" routerLinkActive="active"> Update </a>
-  </button>
-
+</div>
+</div>

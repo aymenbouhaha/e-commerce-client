@@ -16,19 +16,30 @@ export class UserUpdateComponent implements OnInit {
   ngOnInit(): void {
   }
   OnSumbit(form : NgForm) {
-
-
-    //console.log(this.userA) ;
+/*
+    this.userA.firstName=form.value.firstname ;
+    this.userA.lastName=form.value.lastname ;
+    this.userA.address=form.value.address ;
+    this.userA.email=form.value.email ;
+    this.userA.phoneNumber=form.value.phonenumber ;
+    this.userA.password=form.value.Password ;
+    console.log(this.userA) ;
+  */
    this.http.patch('http://localhost:3000/user/update',
-     {"firstName" : form.value.firstname ,
+     {
+       "firstName" : form.value.firstname ,
        "lastName" :form.value.lastname  ,
        "address" : form.value.address ,
        "email" :form.value.email ,
-       "phoneNumber" : form.value.phonenumber }
+       "password" : form.value.Password ,
+       "phoneNumber" : form.value.phonenumber
+     }
    ).subscribe
     (
       responseData => {console.log(responseData) ;  },error => console.log(error)
     ) ;
+
+
 
 
   }
