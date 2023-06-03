@@ -1,0 +1,173 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.product{
+  margin: 80px 10% 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.images{
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-image{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.hero{
+  width: 100%;
+}
+
+.secondary-images{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-gap: 10px;
+}
+
+.secondary{
+  width: 100%;
+  height: 120px;
+}
+
+.product-infos{
+  width: 50%;
+}
+
+.basket-items{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+}
+
+.items-number{
+  display: flex;
+  width: 10%;
+  height: 100%;
+}
+
+.number-input{
+  height: available;
+}
+.icrement-decrement{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-input input{
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+.input-control{
+  text-align: center;
+  height: 50%;
+  border-right: 1px solid black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.increment{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.decrement{
+  border-bottom: 1px solid black;
+}
+
+.add-to-cart{
+  background-color: #8b9091;
+  font-weight: bold;
+  color: white;
+  margin-left: 20px ;
+  width: 40%;
+  height: 100% ;
+  border: none;
+}
+
+.category{
+  font-size: 20px;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.product-name{
+  font-size: 20px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.product-price{
+  font-size: 30px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.product-description{
+  margin-top: 30px;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+
+
+.related-products{
+  margin: 20px 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  color: #f5b3b3;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+
+.products{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr  ;
+  grid-gap: 20px;
+}
+
+
+
+.number-input input::-webkit-inner-spin-button,
+.number-input input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-input input:focus {
+  outline: none;
+
+}
+
+
+
+
