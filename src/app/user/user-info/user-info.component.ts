@@ -10,7 +10,7 @@ import {Subject} from "rxjs";
 })
 export class UserInfoComponent implements OnInit {
   router : Router ;
-  public userA :User = new User("Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","+21696584693","aaaaeeee",true) ;
+  public userA :User = new User(1,"Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","+21696584693","aaaaeeee",true) ;
 
   constructor() { } ;
    verif(status : boolean) : string {

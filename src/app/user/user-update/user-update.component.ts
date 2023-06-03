@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./user-update.component.css']
 })
 export class UserUpdateComponent implements OnInit {
-  public userA :User = new User("Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","96584693","aaaaeeee",true) ;
+  public userA :User = new User(1,"Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","96584693","aaaaeeee",true) ;
   constructor( private http : HttpClient) { }
 
   ngOnInit(): void {
