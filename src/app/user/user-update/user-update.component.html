@@ -1,56 +1,51 @@
-<div class="form_wrapper">
-  <div class="form_container">
-    <div class="title_container">
-      <h2>Update your info</h2>
+<div class="container rounded bg-white mt-5 mb-5" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" width="150px" src="https://bootdey.com/img/Content/avatar/avatar7.png">
+
+        <span class="font-weight-bold">{{userA.firstName}}</span><span class="text-black-50">{{userA.email}}</span><span> </span></div>
     </div>
-    <div class="row clearfix">
-      <div class="">
-        <form (ngSubmit)="OnSumbit(f)"  #f="ngForm" >
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile Settings</h4>
+        </div>
+        <form (ngSubmit)="OnSumbit(f)"  #f="ngForm">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="labels" for="firstname">First Name</label>
+              <input [ngModel]="userA.firstName" type="text" name="firstname" class="form-control" id="firstname"  />
 
-          <div class="row clearfix">
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <label for="firstname">First Name </label> <br>
-                <input [ngModel]="userA.firstName" type="text" name="firstname" id="firstname"  />
-              </div>
             </div>
-            <div class="col_half">
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                <label for="lastname">Last Name</label>         <br>
-                <input ngModel type="text" name="lastname" id="lastname" value="{{userA.lastName}}" required />
-              </div>
-            </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <label for="address" >Address</label>             <br>
-              <input ngModel type="text"  name="address" id="address" value="{{userA.address}}" required>
-            </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <label for="PhoneNumber" >Phone Number</label>            <br>
-              <input ngModel type="text"  name="phonenumber" id="PhoneNumber"  value="{{userA.phoneNumber}}" required >
-
-
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <label for="email" >E-mail</label>                <br>
-              <input ngModel type="email" name="email" id="email" value="{{userA.email}}" required />
-            </div>
-            </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <label for="Password" >Password</label>            <br>
-              <input ngModel type="text"  name="Password" id="Password"  value="{{userA.password}}" required >
-
+            <div class="col-md-6">
+              <label class="labels" for="lastname">Last Name</label>
+              <input [ngModel]="userA.lastName" type="text" name="lastname" class="form-control" id="lastname" required />
             </div>
           </div>
-          <div class="input_field checkbox_option">
-            <input type="checkbox" id="cb2">
-            <label for="cb2">I want to receive the newsletter</label>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels" for="PhoneNumber">Mobile Number</label>
+              <input [ngModel]="userA.phoneNumber" type="text"  name="phonenumber" class="form-control" id="PhoneNumber"   required >
+            </div>
+            <div class="col-md-12">
+              <label class="labels" for="address">Address </label>
+              <input [ngModel]="userA.address" type="text"  name="address" class="form-control" id="address"  required>
+            </div>
+            <div class="col-md-12">
+              <label class="labels" for="email">Email</label>
+              <input [ngModel]="userA.email" type="email" name="email" class="form-control" id="email"  required />
+            </div>
           </div>
-          <button type="submit"> submit</button>
-<!--          <a routerLink="/user/profile" class="btn btn-outline-secondary me-3">Confirm</a>
-  -->
-
+          <a routerLink="/user/profile" >
+          <div class="mt-5 text-center">
+            <button  class="btn btn-outline-secondary me-2" type="submit">Save Profile</button>
+          </div>
+          </a>
         </form>
       </div>
     </div>
+
+
   </div>
 </div>
-
