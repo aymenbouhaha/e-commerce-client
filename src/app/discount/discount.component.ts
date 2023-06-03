@@ -9,10 +9,9 @@ import {Product} from "../shared/models/product/product";
 export class DiscountComponent implements OnInit {
   products : Product[]
   loading : boolean
-  product : Product =new Product()
   constructor() { }
   ngOnInit(): void {
-  this.products.push(this.product) ;
+
   }
 
 

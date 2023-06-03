@@ -52,7 +52,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
-    this.currentUserSource.next(null);
+    this.user.next(null);
     this.router.navigateByUrl('/');
   }
 
