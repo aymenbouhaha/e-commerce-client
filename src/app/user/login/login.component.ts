@@ -22,10 +22,15 @@ export class LoginComponent {
   const password = this.form.value.personDetails.password;
   this.userService.login(email,password).subscribe(
     (response)=>{
-        console.log(response) ,
-          this.router.navigate(['/update'])
+      setTimeout(
+        ()=>{
+          localStorage.removeItem("token")
+          localStorage.removeItem("user")
+        },1000*3600
+      )
+      this.router.navigate(['/shop'])
     },
-    error => console.log("failed"+error)
+    error => alert(error.message.message)
   )
   }
 

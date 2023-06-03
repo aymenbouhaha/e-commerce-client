@@ -20,11 +20,9 @@ export class AddProductComponent implements OnInit {
     responseData =>{
       this.categories=responseData
       console.log(this.categories)
-    })
-
-
-
-
+    },
+    error => console.log(error)
+  )
   }
 
   OnSubmit(form : NgForm) {

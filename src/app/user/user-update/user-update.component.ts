@@ -22,17 +22,9 @@ export class UserUpdateComponent implements OnInit {
     (user)=>{
     }
   )
+    this.userA = JSON.parse(localStorage.getItem("user"))
   }
   OnSumbit(form : NgForm) {
-/*
-    this.userA.firstName=form.value.firstname ;
-    this.userA.lastName=form.value.lastname ;
-    this.userA.address=form.value.address ;
-    this.userA.email=form.value.email ;
-    this.userA.phoneNumber=form.value.phonenumber ;
-    this.userA.password=form.value.Password ;
-    console.log(this.userA) ;
-  */
 
    this.http.patch('http://localhost:3000/user/update',
      {
@@ -40,24 +32,14 @@ export class UserUpdateComponent implements OnInit {
        "lastName" :form.value.lastname  ,
        "address" : form.value.address ,
        "email" :form.value.email ,
-       "password" : form.value.Password ,
        "phoneNumber" : form.value.phonenumber
      }
    ).subscribe
     (
-      responseData => {console.log(responseData) ;
+      responseData => {
+        console.log(responseData) ;
         this.router.navigate(["/profile"])
-       /*
-        this.user.firstName=form.value.firstname ;
-        this.user.lastName=form.value.lastname ;
-        this.user.address=form.value.address ;
-        this.user.email=form.value.email ;
-        this.user.phoneNumber=form.value.phonenumber ;
-        this.loginUser.user.next(this.user) ;
-        console.log(this.user)
 
-
-        */
         },error => console.log(error)
     ) ;
 

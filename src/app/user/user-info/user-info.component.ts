@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
 import {Route, Router, Routes} from "@angular/router";
-import {Subject} from "rxjs";
 import {UserService} from "../user.service";
 
 @Component({
@@ -10,30 +9,18 @@ import {UserService} from "../user.service";
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-  router : Router ;
-  public userA :User = new User(1,localStorage.getItem("firstname"),
-    localStorage.getItem("lastname")     ,
-    localStorage.getItem("address"),
-    localStorage.getItem("email"),
-    localStorage.getItem("phonenumber"),
-    "client",
-    true) ;
-  mail=localStorage.getItem("usermail")
-  constructor(private userservice:UserService) { } ;
-  user:User
-   verif(status : boolean) : string {
-    if(status)
-      return "Verified" ;
 
-    return "Not Verified" ;
-  }
-  GoToUpdate() {
-    this.router.navigate(['/Home']);
-  }
+
+  router : Router ;
+
+  constructor(private userService:UserService) { } ;
+  userA:User
+
+
 
   ngOnInit(): void {
-    console.log(this.mail) ;
 
+    this.userA = JSON.parse(localStorage.getItem("user"))
   }
 
 }
