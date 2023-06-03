@@ -13,6 +13,7 @@ export class UserService {
 
   user : BehaviorSubject<User> = new BehaviorSubject<User>(null)
 
+  isAdmin : boolean = false
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -27,6 +28,10 @@ export class UserService {
                (response)=> {
                  const user = new User(response.id,response.firstName,response.lastName,response.address,response.email,response.phoneNumber,response.role,response.verified)
                  this.user.next(user)
+                 if (user.role=="admin"){
+                   this.isAdmin=true
+                 }
+                 localStorage.setItem("user",JSON.stringify(user))
                  localStorage.setItem("token",response.token)
                }
              )
@@ -43,8 +48,9 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
-    this.user.next(null)
-    this.router.navigateByUrl('/');
+    localStorage.removeItem('user')
+    this.user.next(null);
+    this.router.navigateByUrl('/user/login');
   }
 
 }

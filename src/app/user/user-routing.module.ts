@@ -5,12 +5,13 @@ import {LoginComponent} from "./login/login.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {UserInfoComponent} from "./user-info/user-info.component";
 import {UserUpdateComponent} from "./user-update/user-update.component";
+import {AuthGuard} from "./guard/auth.guard";
 
 const routes: Routes=[
   {path : "login", component: LoginComponent},
   {path : "sign-up", component: SignUpComponent},
-  {path : "profile", component: UserInfoComponent},
-  {path : "update", component: UserUpdateComponent},
+  {path : "profile", component: UserInfoComponent, canActivate: [AuthGuard]},
+  {path : "update", component: UserUpdateComponent },
 
 ]
 
