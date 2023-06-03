@@ -1,1 +1,77 @@
-<p>basket works!</p>
+<section class="padding-y bg-light mt-5">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-7">
+        <h5 class="mb-3">Continue shopping</h5>
+        <hr>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <p class="mb-1">Shopping cart</p>
+            <p class="mb-0">You have {{itemsCount}} items in your cart</p>
+          </div>
+        </div>
+        <app-loading-spinner *ngIf="basketLoading"></app-loading-spinner>
+        <div class="card mb-3" *ngIf="!basketLoading">
+          <div class="card-body" *ngFor="let basketProduct of basket.basketProduct" >
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-row align-items-center">
+                <div>
+                  <img
+                    [src]="basketProduct.product.images[0] ?? imagePlaceHolder "
+                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                </div>
+                <div class="ms-3">
+                  <h5>{{basketProduct.product.name}}</h5>
+                  <p class="small mb-0">{{basketProduct.product.description}}</p>
+                </div>
+              </div>
+              <div class="d-flex flex-row align-items-center">
+                <div style="width: 50px;">
+                  <h5 class="fw-normal mb-0">{{basketProduct.itemsNumber}}</h5>
+                </div>
+                <div style="width: 80px;">
+                  <h5 class="mb-0">{{basketProduct.product.price * basketProduct.itemsNumber}} TND</h5>
+                </div>
+                <a style="color: #cecece;" (click)="removeFromBasket(basketProduct.product.id)"><img src="assets/images/trash.svg"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <aside class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Total price:</dt>
+              <dd class="text-end"> {{total}} TND</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Delivery :</dt>
+              <dd class="text-end"> 7.00 DT </dd>
+            </dl>
+            <hr>
+            <dl class="dlist-align">
+              <dt>Total:</dt>
+              <dd class="text-end text-dark h5"> {{total+7}} TND </dd>
+            </dl>
+
+            <div class="d-grid gap-2 my-3">
+              <a  routerLink="/order" class="btn btn-success w-100"> Order Now  </a>
+              <a routerLink="/" class="btn btn-light w-100"> Back to shop </a>
+            </div>
+          </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
+
+      </aside>
+
+    </div>
+
+    <br><br>
+
+  </div>
+</section>
+

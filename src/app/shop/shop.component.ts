@@ -15,7 +15,6 @@ export class ShopComponent implements OnInit {
     private productService : ShopService,
     private productBackEndService : ShopBackEndService,
     private activatedRoute : ActivatedRoute,
-    private router : Router,
   ) { }
 
   products : Product[]
@@ -39,7 +38,4 @@ export class ShopComponent implements OnInit {
     )
   }
 
-  navigateToProductDetails(product: Product) {
-      this.router.navigate(["product",product.id],{relativeTo : this.activatedRoute})
-  }
 }
