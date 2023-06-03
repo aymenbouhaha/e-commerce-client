@@ -13,6 +13,7 @@ const routes : Routes= [
   {path : "footer",    component: FooterComponent},
   {path : "userInfo",    component: UserInfoComponent},
   {path : "order",    component: OrderComponent},
+  {path : "add-product",    component: AddProductComponent},
   {path : "shop", loadChildren: ()=> import("./shop/shop.module").then(m=>m.ShopModule)},
   {path : "basket", loadChildren : ()=> import ("./basket/basket.module").then(m=>m.BasketModule)},
   {path : "user", loadChildren : () => import("./user/user.module").then(m=>m.UserModule)},
