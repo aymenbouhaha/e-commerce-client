@@ -10,12 +10,14 @@ import {LoginComponent} from "./user/login/login.component";
 import {AddProductComponent} from "./shop/add-product/add-product.component";
 
 const routes : Routes= [
-  {path : "" , component : HomeComponent},
+  {path : "" ,         component : HomeComponent},
   {path : "not-found", component: NotFoundComponent},
   {path : "footer",    component: FooterComponent},
   {path : "userInfo",    component: UserInfoComponent},
   {path : "order",    component: OrderComponent},
   {path : "add-product",    component: AddProductComponent},
+
+
   {path : "shop", loadChildren: ()=> import("./shop/shop.module").then(m=>m.ShopModule)},
   {path : "basket", loadChildren : ()=> import ("./basket/basket.module").then(m=>m.BasketModule)},
   {path : "user", loadChildren : () => import("./user/user.module").then(m=>m.UserModule)},
