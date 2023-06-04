@@ -66,4 +66,14 @@ export class OrderService {
     )
   }
 
+  totalOrderPrice(orderProducts : OrderProduct[]){
+    let total = 0;
+    orderProducts.forEach(
+      (orderProduct)=>{
+        total += orderProduct.product.price * orderProduct.itemsNumber
+      }
+    )
+    return total;
+  }
+
 }
