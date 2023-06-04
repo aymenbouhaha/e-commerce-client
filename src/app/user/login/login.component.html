@@ -1,13 +1,19 @@
-<div class="form">
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="form" *ngIf="!isLoading">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <h2 id="login">Login</h2>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
 
-    <div ngModelGroup="personDetails" #personalDetail="ngModelGroup">
+    <div ngModelGroup="personDetails" >
 
       <label for="email">Email</label>
       <input type="email" id="email" name="email" placeholder="Your email.."
              name="email" ngModel required email>
-
 
       <label for="password">Password</label>
       <input type="password" id="password" name="password" placeholder="Your password.."

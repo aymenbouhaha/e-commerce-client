@@ -1,4 +1,12 @@
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+
 <div class="add-product">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <form class="form" [formGroup]="addProductForm" (ngSubmit)="OnSubmit()">
       <div class="product-basic-info margin">
         <div class="name info">

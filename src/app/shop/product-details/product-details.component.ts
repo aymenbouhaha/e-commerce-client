@@ -29,6 +29,7 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   relatedProductGetSub : Subscription
 
   addToBasketForm : FormGroup
+  errorMessage: string = null;
 
   constructor(
     private route : ActivatedRoute,
@@ -108,10 +109,10 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
      this.basketService.addToBasket(this.product,itemsNumber)
        .subscribe(
          (resp)=>{
-
+            this.router.navigate(["/basket"])
          },
          error => {
-
+              this.errorMessage="An Error Has Occured When Trying To Add The Product To Your Basket"
          }
        )
     }

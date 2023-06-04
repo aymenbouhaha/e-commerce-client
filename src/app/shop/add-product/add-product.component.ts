@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Category} from "../../shared/models/categroy";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -12,12 +13,16 @@ import {Category} from "../../shared/models/categroy";
 
 export class AddProductComponent implements OnInit {
 
-  constructor(private http :HttpClient) { }
+  constructor(private http :HttpClient , private router : Router ) { }
   categories : Category[] =[]
 
   addProductForm : FormGroup
 
   selectedFile : File[] = []
+
+  errorMessage: string = null;
+
+  isLoading : boolean = false
 
   onUpload(event){
     this.selectedFile=<File[]>event.target.files
@@ -43,7 +48,9 @@ export class AddProductComponent implements OnInit {
         }
       )
     },
-    error => console.log(error)
+    error => {
+
+    }
   )
   }
 
@@ -64,10 +71,12 @@ export class AddProductComponent implements OnInit {
         formData
       ).subscribe(
         (res)=>{
-          console.log(res)
+          this.errorMessage=null
+          this.router.navigate(["/shop"])
         },
         error => {
-          console.log(error)
+          this.isLoading=false
+          this.errorMessage="An Error Occured When Adding The Product Retry"
         }
       )
     }

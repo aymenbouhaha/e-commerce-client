@@ -1,4 +1,11 @@
-<div class="add-pop-up">
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="add-pop-up" *ngIf="!isLoading">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="hint margin">Please Select The Number Of Items</div>
   <form class="margin" [formGroup]="addToBasketForm">
     <mat-form-field class="example-full-width mb-2" appearance="fill">

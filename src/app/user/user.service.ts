@@ -26,7 +26,7 @@ export class UserService {
            'http://localhost:3000/user/login',
            { email: email, password: password })
            .pipe(
-           catchError((err)=>{return throwError("err")}),
+           catchError((err)=>{return throwError(err)}),
              tap(
                (response)=> {
                  const user = new User(response.id,response.firstName,response.lastName,response.address,response.email,response.phoneNumber,response.role,response.verified)
@@ -68,7 +68,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
     this.user.next(null);
     this.router.navigateByUrl('/user/login');
   }

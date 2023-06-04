@@ -15,21 +15,36 @@ export class LoginComponent implements OnInit{
   }
   @ViewChild('myForm') form: NgForm;
 
+  isLoading : boolean = false
 
+  error : boolean = false
+
+  errorMessage : string = null
 
   onSubmit() {
-  const email = this.form.value.personDetails.email;
-  const password = this.form.value.personDetails.password;
-  this.userService.login(email,password).subscribe(
+    this.isLoading=true
+    const email = this.form.value.personDetails.email;
+    const password = this.form.value.personDetails.password;
+    this.userService.login(email,password).
+      subscribe(
     (response)=>{
       this.router.navigate(['/shop'])
+      this.errorMessage=null
+      this.isLoading=false
     },
-    error => console.log(error)
+    error => {
+      this.isLoading=false
+      this.errorMessage="The email or the password is wrong"
+    }
   )
   }
 
   ngOnInit(): void {
-    this.userService
+    this.userService.user.subscribe((user)=>{
+      if (user){
+        this.router.navigate(["/shop"])
+      }
+    })
   }
 
 }

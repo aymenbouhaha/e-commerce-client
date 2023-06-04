@@ -2,6 +2,9 @@
   <app-loading-spinner></app-loading-spinner>
 </div>
 <div class="product" *ngIf="!productIsLoading">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="images">
     <div class="hero-image">
       <img *ngIf="product.images.length>0" [src]="product.images[0] | image" alt="hero" class="hero">

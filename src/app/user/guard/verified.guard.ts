@@ -6,10 +6,11 @@ import {UserService} from "../user.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class VerifiedGuard implements CanActivate {
 
-  constructor(private userService:UserService) {
+  constructor(private userService:UserService, private router : Router) {
   }
+
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -17,15 +18,14 @@ export class AdminGuard implements CanActivate {
     return this.userService.user.pipe(
       take(1),
       map(user => {
-        if (user){
-          if (user.role=="admin") {
-            return true;
+          if (user){
+            if (user.verified){
+              return true
+            }
+          }else {
+            return this.router.createUrlTree(["/user/verify"]);
           }
-          return false;
-        }else {
-          return false;
         }
-      }
       )
     )
   }

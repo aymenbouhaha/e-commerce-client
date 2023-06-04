@@ -12,13 +12,26 @@ export class HeaderComponent implements OnInit {
     private userService : UserService
   ) { }
 
-  isAuthenticated : boolean
+  isAuthenticated : boolean = false
+
+  isAdmin : boolean =false
 
 
   ngOnInit(): void {
-
+    this.userService.user.subscribe(
+      (user)=>{
+        if (user){
+          this.isAuthenticated=true
+          if (user.role=="admin"){
+            this.isAdmin=true
+          }
+        }else {
+          this.isAuthenticated=false
+          this.isAdmin=false
+        }
+      }
+    )
   }
-
 
   logout(){
     this.userService.logout()

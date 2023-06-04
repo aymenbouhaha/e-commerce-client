@@ -12,3 +12,11 @@ body{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: "Poppins", sans-serif; }
+
+
+.loading{
+  margin: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
