@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../shared/models/product/product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BasketService} from "../../basket/basket.service";
+import {BasketBackEndService} from "../../basket/basket-back-end.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DiscountDialogComponent} from "../../discount/discount-dialog/discount-dialog.component";
+import {AddToBasketPopUpComponent} from "../add-to-basket-pop-up/add-to-basket-pop-up.component";
 
 @Component({
   selector: 'app-product-item',
@@ -16,7 +20,8 @@ export class ProductItemComponent implements OnInit {
   constructor(
     private activatedRoute : ActivatedRoute,
     private router : Router,
-    private basketService : BasketService
+    private basketService : BasketBackEndService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +32,22 @@ export class ProductItemComponent implements OnInit {
   }
 
   addToBasket(){
-    this.basketService.addToBasket(this.product,1)
+    const dialogRef = this.dialog.open(
+      AddToBasketPopUpComponent,
+      {
+        width : "600px",
+        data : this.product,
+      }
+    )
   }
 
+  makeDiscount() {
+    const dialogRef = this.dialog.open(
+      DiscountDialogComponent,
+      {
+        width : "600px",
+            data : this.product,
+      }
+    )
+  }
 }

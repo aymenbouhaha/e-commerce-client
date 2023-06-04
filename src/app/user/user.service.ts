@@ -5,6 +5,7 @@ import {BehaviorSubject, catchError, map, of, ReplaySubject, tap, throwError} fr
 import { environment } from 'src/environments/environment';
 import {  User } from '../shared/models/user';
 import {UserInterface} from "../shared/models/interfaces/user.interface";
+import {BasketService} from "../basket/basket.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class UserService {
 
   isAdmin : boolean = false
 
-  constructor(private http: HttpClient, private router: Router) { }
+  isAuthenticated : boolean
+
+  constructor(private http: HttpClient, private router: Router , private basketService : BasketService) { }
 
 
   login(email : string , password : string) {
@@ -28,6 +31,9 @@ export class UserService {
                (response)=> {
                  const user = new User(response.id,response.firstName,response.lastName,response.address,response.email,response.phoneNumber,response.role,response.verified)
                  this.user.next(user)
+                 this.isAuthenticated=true
+                 console.log(response.basket)
+                 this.basketService.setBasket(response.basket)
                  if (user.role=="admin"){
                    this.isAdmin=true
                  }
@@ -43,6 +49,20 @@ export class UserService {
         "http://localhost:3000/user/signup",
         credentials
       )
+  }
+
+  updateUserInfo(userInfo:{firstName :string, lastName : string, phoneNumber : string, address: string, email : string}){
+    return this.http.patch(
+          "http://localhost:3000/user/update",userInfo
+    )
+  }
+
+  verifyAccount(code: string){
+    return this.http.patch(
+      "http://localhost:3000/user/verify",{
+        code
+      }
+    )
   }
 
 

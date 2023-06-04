@@ -4,6 +4,7 @@ import {Order, OrderInterface} from "../shared/models/order/order";
 import {map} from "rxjs";
 import {Product} from "../shared/models/product/product";
 import {ShopBackEndService} from "../shop/shop-back-end.service";
+import {OrderProduct} from "../shared/models/order/order-product";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,6 @@ export class OrderService {
 
   constructor(
     private http: HttpClient,
-    private shopService : ShopBackEndService
   ) { }
 
 
@@ -24,32 +24,24 @@ export class OrderService {
       .pipe(
         map(
           (orderInterface)=>{
-            const orders=orderInterface.map(
+            const orders=orderInterface.map<Order>(
               (orderInterface)=>{
-                const orderProductsRelations=orderInterface.orderProducts.map(
+                const orderProductsRelations=orderInterface.orderProducts.map<OrderProduct>(
                   (orderProductsRelation)=>{
-                    const product=orderProductsRelation.product
-                    const finalProduct : Product={
-                      ...product,
-                      images :product.images ? product.images.map(
-                        (image)=> {
-                          return this.shopService.decodeImageUrl(image.type,image.data.data)
-                        }
-                      ) : []
-                    }
                     return {
                       ...orderProductsRelation,
-                      product : finalProduct
+                      product : {
+                        ...orderProductsRelation.product,
+                        images :orderProductsRelation.product.images ?? []
+                      }
                     }
                   }
                 )
-                const order = new Order()
-                order.id=orderInterface.id
-                order.date=orderInterface.date
-                order.client=orderInterface.client ?? null
-                order.status=orderInterface.status
-                order.orderProducts=orderProductsRelations
-                return Order
+                return {
+                  ...orderInterface,
+                  client : orderInterface.client ?? null,
+                  orderProducts : orderProductsRelations
+                }
               }
             )
             return orders
@@ -68,7 +60,7 @@ export class OrderService {
       }
     ).subscribe(
       (success)=>{
-        console.log(success)
+
       },
       error => console.log(error)
     )

@@ -25,18 +25,18 @@ export class DiscountComponent implements OnInit {
     this.loading=true
     this.actievatedRoute.queryParams.subscribe(
       (params)=>{
-        this.discountService.getproducts(params.page?? 1)
-          .subscribe(
-            (discounts)=>{
-              this.discounts=discounts
-              if (discounts.length){
-                this.items=Math.ceil((discounts.length))
-              }else {
-                this.items=1
-              }
-              this.loading=false
-            }
-          )
+        // this.discountService.getproducts(params.page?? 1)
+        //   .subscribe(
+        //     (discounts)=>{
+        //       this.discounts=discounts
+        //       if (discounts.length){
+        //         this.items=Math.ceil((discounts.length))
+        //       }else {
+        //         this.items=1
+        //       }
+        //       this.loading=false
+        //     }
+        //   )
       }
     )
   }

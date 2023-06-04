@@ -26,9 +26,13 @@
 <!--    </div>-->
   </div>
   <div class="shop-content">
-    <div class="paginator">
-      <div class="page-number" *ngFor="let i of range(1,pageNumber)" (click)="navigateByPage(i)">{{i}}</div>
-    </div>
+    <mat-paginator [length]="pagesNumber ?? 1"
+                   [pageSize]="2"
+                   [pageIndex]="0"
+                   (page)="navigateByPage($event)"
+    >
+    </mat-paginator>
+
     <div class="text-center" *ngIf="loading">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>

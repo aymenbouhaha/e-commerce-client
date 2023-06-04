@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../shared/models/user";
 import {Route, Router, Routes} from "@angular/router";
 import {UserService} from "../user.service";
+import {User} from "../../shared/models/user";
 
 @Component({
   selector: 'app-user-info',
@@ -14,13 +14,15 @@ export class UserInfoComponent implements OnInit {
   router : Router ;
 
   constructor(private userService:UserService) { } ;
-  userA:User
 
-
+  user : User
 
   ngOnInit(): void {
-
-    this.userA = JSON.parse(localStorage.getItem("user"))
+    this.userService.user.subscribe(
+      (user) => {
+        this.user=user
+      }
+    )
   }
 
 }

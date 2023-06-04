@@ -1,3 +1,4 @@
+import {Basket} from "../basket/basket";
 
 
 export interface UserInterface {
@@ -8,6 +9,7 @@ export interface UserInterface {
   email : string
   phoneNumber : string
   role : string
-  verified : boolean
+  verified : boolean,
+  basket : Basket
   token : string
 }

@@ -9,9 +9,9 @@ import {UserModule} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptorInterceptor} from "./shared/interceptors/auth-interceptor.interceptor";
-
-import {HomeModule} from "./home/home.module";
 import {FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatNativeDateModule} from "@angular/material/core";
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,9 @@ import {FormsModule} from "@angular/forms";
     UserModule,
     SharedModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule
   ],
   providers: [
     {

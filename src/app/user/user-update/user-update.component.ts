@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserInfoComponent} from "../user-info/user-info.component";
 import {User} from "../../shared/models/user";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../user.service";
 import {take} from "rxjs";
@@ -13,39 +13,45 @@ import {Route, Router} from "@angular/router";
   styleUrls: ['./user-update.component.css']
 })
 export class UserUpdateComponent implements OnInit {
-  public userA :User = new User(1,"Firas","Saada" ,"borj Baccouche", "firassaada@gmail.com","96584693","aaaaeeee",true) ;
-  constructor( private loginUser: UserService,private http : HttpClient ,private router:Router) { }
 
-  user:User
+  constructor(
+    private userService: UserService,
+    private router:Router
+  ) { }
+
+  updateForm : FormGroup
+
   ngOnInit(): void {
-  this.loginUser.user.subscribe(
-    (user)=>{
-    }
-  )
-    this.userA = JSON.parse(localStorage.getItem("user"))
+    this.updateForm= new FormGroup(
+      {
+          "firstName" : new FormControl(null),
+        "lastName": new FormControl(null),
+        "email" : new FormControl(null),
+        "phoneNumber" : new FormControl(null),
+        "address" : new FormControl(null)
+      }
+    )
+      this.userService.user.subscribe(
+        (user)=>{
+              this.updateForm.setValue({
+                firstName : user? user.firstName: null,
+                lastName : user?  user.lastName : null ,
+                email : user?  user.email : null,
+                phoneNumber : user?  user.phoneNumber : null,
+                address : user?  user.address : null
+              })
+        }
+      )
   }
-  OnSumbit(form : NgForm) {
 
-   this.http.patch('http://localhost:3000/user/update',
-     {
-       "firstName" : form.value.firstname ,
-       "lastName" :form.value.lastname  ,
-       "address" : form.value.address ,
-       "email" :form.value.email ,
-       "phoneNumber" : form.value.phonenumber
-     }
-   ).subscribe
-    (
-      responseData => {
-        console.log(responseData) ;
-        this.router.navigate(["/profile"])
-
-        },error => console.log(error)
-    ) ;
-
-
-
-
+  onSubmit() {
+    this.userService.updateUserInfo(this.updateForm.value)
+      .subscribe(
+        (respo)=>{
+          console.log(respo)
+        },
+        error => console.log(error)
+      )
   }
 
 

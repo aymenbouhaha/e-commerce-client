@@ -1,6 +1,6 @@
 import {Category} from "../categroy";
 import {Discount} from "../discount";
-import {SafeUrl} from "@angular/platform-browser";
+import {Image} from "./image";
 
 export class Product {
 
@@ -10,6 +10,6 @@ export class Product {
   itemsNumber : number
   description : string
   category : Category
-  images : SafeUrl[]
+  images : Image[]
   discount : Discount
 }

@@ -1,53 +1,38 @@
-<div class="container rounded bg-white mt-5 mb-5" xmlns="http://www.w3.org/1999/html">
-  <div class="row">
-    <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-
-        <span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
-    </div>
-    <div class="col-md-5 border-right">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-right">New Product</h4>
+<div class="add-product">
+  <form class="form" [formGroup]="addProductForm" (ngSubmit)="OnSubmit()">
+      <div class="product-basic-info margin">
+        <div class="name info">
+          <label for="name" class="">Product Name</label>
+          <div><input name="name" id="name" class="input input-info" formControlName="name"></div>
         </div>
-        <form >
-          <div class="row mt-2">
-            <div class="col-md-6">
-              <label class="labels" for="productname">Product Name</label>
-              <input ngModel type="text" name="productname" class="form-control" id="productname"  />
-
-            </div>
-            <div class="col-md-6">
-              <label class="labels" for="price">Price</label>
-              <input ngModel type="text" name="price" class="form-control" id="price" required />
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-12">
-              <label class="labels" for="itemsnumber">Items Number</label>
-              <input ngModel type="number"  name="itemsnumber" class="form-control" id="itemsnumber"   required >
-            </div>
-
-
-
-            <div class="col-md-6">
-              <div class="col-md-12">
-                <label class="labels" for="categoryname">Category Name</label>
-                <input ngModel type="text"  name="categoryname" class="form-control" id="categoryname"   required >
-              </div>
-            </div>
-
-            <div class="col-md-12">
-              <label class="labels" for="description">Description</label>
-              <input ngModel type="email" name="description" class="form-control" id="description"  required />
-            </div>
-          </div>
-
-          <button type="submit">submit</button>
-        </form>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
+        <div class="price info">
+          <label for="price" class="">Price</label>
+          <div><input name="price" id="price" type="number" class="input input-info" formControlName="price"></div>
+        </div>
+        <div class="itemNumber info">
+          <label for="itemsNumber" class="">Items Number</label>
+          <div><input name="itemsNumber" type="number" id="itemsNumber" class="input input-info" formControlName="itemsNumber"></div>
+        </div>
+      </div>
+      <div class="categories info margin">
+        <label for="categoryName">Product Category</label>
+        <select id="categoryName" name="categoryName" class="input" formControlName="categoryName" >
+          <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+        </select>
+      </div>
+      <div class="description info margin">
+        <label for="description">Product Description</label>
+        <textarea id="description" name="description" class="description" rows="4" formControlName="description"></textarea>
+      </div>
+    <div class="images info">
+      <input type="file" id="upload" accept="image/*" multiple="true" (change)="onUpload($event)" formControlName="images" />
+      <label for="upload">
+        <span>Please select images</span>
+      </label>
+    </div>
+      <div class="button margin">
+        <button class="input cancel" type="reset">Cancel</button>
+        <button class="input add" type="submit">Add Product</button>
+      </div>
+  </form>
+</div>

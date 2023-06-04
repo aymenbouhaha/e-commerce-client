@@ -1,45 +1,120 @@
-body {
-  background: rgb(99, 39, 120)
+.add-product{
+  margin: 20px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
 }
 
-.form-control:focus {
-  box-shadow: none;
-  border-color: #BA68C8
+.form{
+  padding: 50px 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.profile-button {
-  background: rgb(99, 39, 120);
-  box-shadow: none;
-  border: none
+.product-basic-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.profile-button:hover {
-  background: #682773
+.info{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
 
-.profile-button:focus {
-  background: #682773;
-  box-shadow: none
+.input-info{
+  width: 100%;
 }
 
-.profile-button:active {
-  background: #682773;
-  box-shadow: none
+.margin{
+  margin: 20px 0;
+  width: 100%;
 }
 
-.back:hover {
-  color: #682773;
-  cursor: pointer
+.input{
+  height: 50px;
+  border: 1.5px solid #ecc4c4;
+  border-radius: 5px;
 }
 
-.labels {
-  font-size: 11px
+.product-basic-info{
+  justify-content: space-between;
 }
 
-.add-experience:hover {
-  background: #BA68C8;
-  color: #fff;
+label{
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold ;
+  color: #e0c2c2;
+}
+
+.button{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button button{
+  width: 30%;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.cancel{
+  background-color: red;
+}
+
+.add{
+  background-color: #45a049;
+}
+
+.button button:hover{
+  background-color: #8b9091;
+}
+
+.description{
+  border-radius: 5px;
+}
+
+.description textarea{
+  border: 1.5px solid #ecc4c4;
+}
+
+.images {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ecc4c4;
+  padding: 40px;
+  width: 100%;
   cursor: pointer;
-  border: solid 1px #BA68C8
 }
 
+.images input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.images label {
+  display: block;
+}
+
+.images span {
+  color: #888;
+  cursor: pointer;
+
+}
+
+.images:hover {
+  border-color: #666;
+}
