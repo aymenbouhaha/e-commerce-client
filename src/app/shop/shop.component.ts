@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ShopBackEndService} from "./shop-back-end.service";
 import {HttpClient} from "@angular/common/http";
 import {Category} from "../shared/models/categroy";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-shop',
@@ -23,17 +24,17 @@ export class ShopComponent implements OnInit {
 
   products : Product[]
   loading : boolean
-  pageNumber: number
+  pagesNumber: number
 
   categories : Category[]=[]
 
 
-  navigateByPage(pageNumber : number){
+  navigateByPage(event : PageEvent){
     this.activatedRoute.queryParams.subscribe(
       (params)=>{
         this.router.navigate(["/shop"],{relativeTo : this.activatedRoute , queryParams : {
             ...params,
-            page : pageNumber
+            page : event.pageIndex+1
           }})
       }
     )
@@ -73,10 +74,13 @@ export class ShopComponent implements OnInit {
           (products)=>{
             this.products=products
             this.productService.setProducts(products)
-            this.pageNumber=Math.ceil(this.products.length/15)
+            if (!this.pagesNumber){
+              this.pagesNumber=this.productService.getLength()
+            }
             this.loading=false
           },
           error => {
+            console.log(error)
           }
         )
 

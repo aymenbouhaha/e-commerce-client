@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule} from "@angular/router";
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
+import { ImagePipe } from './image.pipe';
 
 
 
@@ -14,12 +15,14 @@ import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.compone
     FooterComponent,
     NotFoundComponent,
     LoadingSpinnerComponent,
+    ImagePipe,
   ],
   exports: [
     HeaderComponent,
     LoadingSpinnerComponent,
     NotFoundComponent,
     FooterComponent,
+    ImagePipe
   ],
   imports: [
     CommonModule,

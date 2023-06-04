@@ -11,6 +11,8 @@ export class ShopService {
 
   products : Product[] =[]
 
+  length : number
+
   constructor(
     private basketService : BasketService
   ) { }
@@ -20,6 +22,13 @@ export class ShopService {
     this.products=product
   }
 
+  setLength(length: number){
+    this.length=length
+  }
+
+  getLength(){
+    return this.length
+  }
 
 
   getProductById(id : number){

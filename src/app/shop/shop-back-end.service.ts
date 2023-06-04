@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {DomSanitizer} from "@angular/platform-browser";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ProductInterface} from "../shared/models/interfaces/product.interface";
+import {GetProductInterface, ProductInterface} from "../shared/models/interfaces/product.interface";
 import {map} from "rxjs";
-import {environment} from "../../environments/environment";
 import {Product} from "../shared/models/product/product";
+import {ShopService} from "./shop.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +11,10 @@ import {Product} from "../shared/models/product/product";
 export class ShopBackEndService {
 
   constructor(
-    private sanitizer:DomSanitizer,
     private http: HttpClient,
+    private shopService : ShopService
   ) { }
 
-
-  sanitize( url:string ) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
-  }
-
-  _arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = new Uint8Array( buffer );
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-      binary += String.fromCharCode( bytes[ i ] );
-    }
-    return window.btoa( binary );
-  }
-
-
-  decodeImageUrl(type: string,buffer : any){
-    return this.sanitize('data:'+type+';base64, '+this._arrayBufferToBase64(buffer))
-  }
 
   getProducts(page? : number,category? : string){
     let params =new HttpParams()
@@ -44,25 +24,22 @@ export class ShopBackEndService {
     if (category){
       params =params.append("category",category)
     }
-    return this.http.get<ProductInterface[]>("http://localhost:3000/product",
+    return this.http.get<GetProductInterface>("http://localhost:3000/product",
       {
         params : params
       },
     )
       .pipe<Product[]>(
         map(
-          products=>{
+          productInterface=>{
+            const products=productInterface.products
+            const length=productInterface.length
+            this.shopService.setLength(length)
             return  products.map(
               (product)=>{
                 return {
                   ...product,
-                  images : product.images?
-                    product.images.map(
-                      (image)=>{
-                        return this.sanitize('data:'+image.type+';base64, '+this._arrayBufferToBase64(image.data.data))
-                      }
-                    )
-                    : [],
+                  images : product.images ?? [],
                   discount : product.discount ?? null
                 }
               }
@@ -82,21 +59,13 @@ export class ShopBackEndService {
           console.log(product)
           return {
             ...product,
-            images : product.images?
-              product.images.map(
-                (image)=>{
-                  return this.sanitize('data:'+image.type+';base64, '+this._arrayBufferToBase64(image.data.data))
-                }
-              )
-              : [],
+            images : product.images?? [],
             discount : product.discount ?? null
           }
         }
       )
     )
   }
-
-
 
 
 }

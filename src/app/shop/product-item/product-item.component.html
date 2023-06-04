@@ -1,7 +1,7 @@
 <div class="product-item">
   <div class="image-container" (click)="navigateToProductDetails(product)">
     <img *ngIf="product.images.length>0"
-         [src]="product.images[0]"
+         [src]="product.images[0] | image"
          alt="">
     <img *ngIf="product.images.length<=0" src="assets/images/first.png" alt="">
   </div>
@@ -17,11 +17,11 @@
     </div>
     <div class="product-card-footer">
       <div class="add-to-cart" (click)="addToBasket()">Ajouter Au Panier</div>
+<!--      <div class="add-to-cart" (click)="makeDiscount()">Make Discount</div>-->
       <div class="discount" *ngIf="product.discount!=null">{{product.discount.value}}%</div>
     </div>
   </div>
 </div>
-<!--         [src]="sanitize('data:'+product.images[0].type+';base64, '+_arrayBufferToBase64(product.images[0].data))"-->
 
 
 

@@ -1,0 +1,13 @@
+<div class="add-pop-up">
+  <div class="hint margin">Please Select The Number Of Items</div>
+  <form class="margin" [formGroup]="addToBasketForm">
+    <mat-form-field class="example-full-width mb-2" appearance="fill">
+      <mat-label>Items Number</mat-label>
+      <input matInput type="number" >
+    </mat-form-field>
+    <div class="buttons">
+      <button type="reset" mat-raised-button	color="warn">Cancel</button>
+      <button type="submit" mat-raised-button	color="primary">Add To Basket</button>
+    </div>
+  </form>
+</div>

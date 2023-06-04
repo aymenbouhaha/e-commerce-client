@@ -1,0 +1,35 @@
+.add-pop-up{
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hint {
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.for
+
+.example-full-width{
+  width: 100%;
+
+}
+
+.buttons button{
+  font-weight: bold;
+}
+
+.margin{
+  margin: 10px 0;
+  width: 100%;
+}

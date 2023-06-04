@@ -1,10 +1,12 @@
 import {AfterContentInit, AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../../shared/models/product/product";
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ShopService} from "../shop.service";
 import {ShopBackEndService} from "../shop-back-end.service";
 import {Subscription} from "rxjs";
+import {BasketService} from "../../basket/basket.service";
+import {BasketBackEndService} from "../../basket/basket-back-end.service";
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +15,7 @@ import {Subscription} from "rxjs";
 })
 export class ProductDetailsComponent implements OnInit  , OnDestroy{
 
-  @ViewChild('f') itemsForm : NgForm
+
   @Input() product : Product
 
   productIsLoading : boolean
@@ -23,20 +25,27 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   products : Product[]
 
   productGetSub : Subscription
+
   relatedProductGetSub : Subscription
 
-
+  addToBasketForm : FormGroup
 
   constructor(
     private route : ActivatedRoute,
     private shopService : ShopService,
     private shopBackEndService : ShopBackEndService,
+    private basketService : BasketBackEndService,
     private router : Router
   ) { }
 
 
 
   ngOnInit(): void {
+    this.addToBasketForm=new FormGroup(
+      {
+        itemsNumber :new FormControl(1,[Validators.required,Validators.min(1)])
+      }
+    )
     this.productIsLoading=true
     this.relatedProductLoading=true
     this.route.params.subscribe(
@@ -74,9 +83,9 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
 
 
   incrementItemsNumber(){
-    let itemNumber=this.itemsForm.value.itemsNumber
+    let itemNumber=this.addToBasketForm.get("itemsNumber").value
     itemNumber++
-    this.itemsForm.setValue(
+    this.addToBasketForm.patchValue(
       {
         itemsNumber : itemNumber
       }
@@ -84,9 +93,9 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   }
 
   decrementItemsNumber(){
-    let itemNumber=this.itemsForm.value.itemsNumber
+    let itemNumber=this.addToBasketForm.get("itemsNumber").value
     itemNumber--
-    this.itemsForm.setValue(
+    this.addToBasketForm.patchValue(
       {
         itemsNumber : itemNumber
       }
@@ -94,17 +103,25 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   }
 
   onSubmit(){
-    const itemsNumber= this.itemsForm.value.itemsNumber
-    if (itemsNumber<1){
-        return ;
+    const itemsNumber=this.addToBasketForm.get("itemsNumber").value
+    if (this.addToBasketForm.valid){
+     this.basketService.addToBasket(this.product,itemsNumber)
+       .subscribe(
+         (resp)=>{
+
+         },
+         error => {
+
+         }
+       )
     }
-
-
-
   }
 
   ngOnDestroy(): void {
     if (this.productGetSub){
+      this.productGetSub.unsubscribe()
+    }
+    if (this.relatedProductGetSub){
       this.productGetSub.unsubscribe()
     }
   }

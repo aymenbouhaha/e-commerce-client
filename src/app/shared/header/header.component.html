@@ -16,6 +16,10 @@
       <span class="material-symbols-outlined hover">shopping_cart</span>
       <p class="right-item-text text hover">Panier</p>
     </div>
+    <div class="items basket links" routerLink="/user/login">
+      <span class="material-symbols-outlined hover">shopping_cart</span>
+      <p class="right-item-text text hover">Login</p>
+    </div>
     <div class="items basket links" (click)="logout()" *ngIf="isAuthenticated">
       <span class="material-symbols-outlined hover">logout</span>
       <p class="right-item-text text hover">Logout</p>

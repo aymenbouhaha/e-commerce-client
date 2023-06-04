@@ -11,6 +11,12 @@ export interface ProductInterface{
   category : Category
   images : ImageInterface[]
   discount : Discount
+}
+
+export interface GetProductInterface{
+
+  products : ProductInterface[]
+  length : number
 
 }
 
