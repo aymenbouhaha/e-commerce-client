@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule} from "@angular/router";
 import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 import { ImagePipe } from './image.pipe';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -24,9 +25,10 @@ import { ImagePipe } from './image.pipe';
     FooterComponent,
     ImagePipe
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule
+    ]
 })
 export class SharedModule { }
