@@ -61,8 +61,8 @@
 
 
 .descrption{
+  width: 260px;
   white-space: nowrap;
-  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 13px;

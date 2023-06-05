@@ -8,6 +8,7 @@ import {Subscription} from "rxjs";
 import {BasketService} from "../../basket/basket.service";
 import {BasketBackEndService} from "../../basket/basket-back-end.service";
 import {Image} from "../../shared/models/product/image";
+import {UserService} from "../../user/user.service";
 
 @Component({
   selector: 'app-product-details',
@@ -39,6 +40,7 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
     private shopService : ShopService,
     private shopBackEndService : ShopBackEndService,
     private basketService : BasketBackEndService,
+    private userService : UserService,
     private router : Router
   ) { }
 
@@ -115,15 +117,17 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   onSubmit(){
     const itemsNumber=this.addToBasketForm.get("itemsNumber").value
     if (this.addToBasketForm.valid){
-     this.basketService.addToBasket(this.product,itemsNumber)
-       .subscribe(
-         (resp)=>{
-            this.router.navigate(["/basket"])
-         },
-         error => {
-              this.errorMessage="An Error Has Occured When Trying To Add The Product To Your Basket"
-         }
-       )
+     if (!this.userService.isAdmin){
+       this.basketService.addToBasket(this.product,itemsNumber)
+         .subscribe(
+           (resp)=>{
+             this.router.navigate(["/basket"])
+           },
+           error => {
+             this.errorMessage="An Error Has Occured When Trying To Add The Product To Your Basket"
+           }
+         )
+     }
     }
   }
 

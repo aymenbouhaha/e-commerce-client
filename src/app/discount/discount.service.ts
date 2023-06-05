@@ -19,6 +19,7 @@ export class DiscountService {
       .pipe(
         map(
           (discount)=>{
+            console.log(discount)
             const discounts = discount.map(
               (discount)=>{
                 const discountProduct=discount.product

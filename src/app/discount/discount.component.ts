@@ -22,14 +22,16 @@ export class DiscountComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading=true
+    console.log(this.loading)
     this.discountService.getProducts()
       .subscribe(
         (discounts)=>{
-          console.log(discounts)
           this.discounts=discounts
           this.loading=false
         },
         error =>{
+          this.loading=false
+          console.log(error)
           this.errorMessage="An Error Has Occured Please Refresh The Page To Get Our Disounts"
         }
       )
