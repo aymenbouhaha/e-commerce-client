@@ -1,12 +1,19 @@
-<div class="add-pop-up">
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="add-pop-up" *ngIf="!isLoading">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="hint margin">Please Select The Number Of Items</div>
-  <form class="margin" [formGroup]="addToBasketForm">
+  <form class="margin" [formGroup]="addToBasketForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="example-full-width mb-2" appearance="fill">
       <mat-label>Items Number</mat-label>
-      <input matInput type="number" >
+      <input matInput type="number" formControlName="itemsNumber">
     </mat-form-field>
     <div class="buttons">
-      <button type="reset" mat-raised-button	color="warn">Cancel</button>
+      <button type="reset" mat-raised-button	color="warn" (click)="onClose()">Cancel</button>
       <button type="submit" mat-raised-button	color="primary">Add To Basket</button>
     </div>
   </form>

@@ -7,6 +7,7 @@ import {ShopBackEndService} from "../shop-back-end.service";
 import {Subscription} from "rxjs";
 import {BasketService} from "../../basket/basket.service";
 import {BasketBackEndService} from "../../basket/basket-back-end.service";
+import {Image} from "../../shared/models/product/image";
 
 @Component({
   selector: 'app-product-details',
@@ -24,11 +25,14 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
 
   products : Product[]
 
+  heroImage :Image = null
+
   productGetSub : Subscription
 
   relatedProductGetSub : Subscription
 
   addToBasketForm : FormGroup
+  errorMessage: string = null;
 
   constructor(
     private route : ActivatedRoute,
@@ -39,6 +43,9 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
   ) { }
 
 
+  changeHeroImage(image : Image){
+    this.heroImage=image
+  }
 
   ngOnInit(): void {
     this.addToBasketForm=new FormGroup(
@@ -51,15 +58,18 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
     this.route.params.subscribe(
       async (params) => {
         this.product = this.shopService.getProductById(params.id)
+
         if (this.product) {
           this.products=this.shopService.getProductsByCategory(this.product.category.name)
           this.productIsLoading = false
           this.relatedProductLoading = false
+          this.heroImage=this.product.images[0]
         } else {
           this.productGetSub = await this.shopBackEndService.getProductById(params.id)
             .subscribe(
               (product) => {
                 this.product = product
+                this.heroImage=this.product.images[0]
                 this.productIsLoading = false
                 this.relatedProductGetSub = this.shopBackEndService.getProducts(null, this.product.category.name).subscribe(
                   (products) => {
@@ -108,10 +118,10 @@ export class ProductDetailsComponent implements OnInit  , OnDestroy{
      this.basketService.addToBasket(this.product,itemsNumber)
        .subscribe(
          (resp)=>{
-
+            this.router.navigate(["/basket"])
          },
          error => {
-
+              this.errorMessage="An Error Has Occured When Trying To Add The Product To Your Basket"
          }
        )
     }

@@ -3,25 +3,33 @@
     <img src="assets/images/DIDON'ART%20LOGO%20GOLD.png" alt="" class="logo-image">
   </div>
   <ul class="center-elements">
-    <li class="links text" routerLink="" >Accueil</li>
-    <li class="links text" routerLink="/shop">Nos Produit</li>
-    <li class="links text" routerLink="/discount">Nos Promotions</li>
+    <li class="links text" routerLink="/shop">Products</li>
+    <li class="links text" routerLink="/discount">Discounts</li>
+    <li class="links text" routerLink="/order" *ngIf="isAuthenticated">Orders</li>
   </ul>
   <div class="right-items">
-    <div class="items account links" routerLink="/user/profile">
-      <span class="material-symbols-outlined hover">person</span>
+    <div class="items account links" routerLink="/user/profile" *ngIf="isAuthenticated && !isAdmin">
+      <img src="assets/images/profile.svg" class="icon" >
       <p class="right-item-text text hover ">Compte</p>
     </div>
-    <div class="items basket links" routerLink="/basket">
-      <span class="material-symbols-outlined hover">shopping_cart</span>
+    <div class="items basket links" routerLink="/basket" *ngIf="isAuthenticated && !isAdmin">
+      <img src="assets/images/basket.svg" class="icon" >
       <p class="right-item-text text hover">Panier</p>
     </div>
-    <div class="items basket links" routerLink="/user/login">
-      <span class="material-symbols-outlined hover">shopping_cart</span>
+    <div class="items basket links" routerLink="/user/login" *ngIf="!isAuthenticated">
+      <img src="assets/images/login.svg" class="icon" >
       <p class="right-item-text text hover">Login</p>
     </div>
+    <div class="items basket links" routerLink="/user/sign-up" *ngIf="!isAuthenticated">
+      <img src="assets/images/login.svg" class="icon">
+      <p class="right-item-text text hover">Sign Up</p>
+    </div>
+    <div class="items basket links" routerLink="/shop/product/add" *ngIf="isAuthenticated && isAdmin">
+      <img src="assets/images/add.svg" class="icon">
+      <p class="right-item-text text hover">Add Product</p>
+    </div>
     <div class="items basket links" (click)="logout()" *ngIf="isAuthenticated">
-      <span class="material-symbols-outlined hover">logout</span>
+      <img src="assets/images/logout.svg" class="icon">
       <p class="right-item-text text hover">Logout</p>
     </div>
   </div>

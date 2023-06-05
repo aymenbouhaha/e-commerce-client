@@ -72,6 +72,7 @@ export class ShopComponent implements OnInit {
       (params)=>{
         this.productBackEndService.getProducts(params.page,params.category).subscribe(
           (products)=>{
+            this.loading=true
             this.products=products
             this.productService.setProducts(products)
             if (!this.pagesNumber){
@@ -80,6 +81,7 @@ export class ShopComponent implements OnInit {
             this.loading=false
           },
           error => {
+            this.loading=false
             console.log(error)
           }
         )

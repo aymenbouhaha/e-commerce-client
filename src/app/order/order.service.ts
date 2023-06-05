@@ -58,12 +58,17 @@ export class OrderService {
       {
         product : orderDto
       }
-    ).subscribe(
-      (success)=>{
-
-      },
-      error => console.log(error)
     )
+  }
+
+  totalOrderPrice(orderProducts : OrderProduct[]){
+    let total = 0;
+    orderProducts.forEach(
+      (orderProduct)=>{
+        total += orderProduct.product.price * orderProduct.itemsNumber
+      }
+    )
+    return total;
   }
 
 }

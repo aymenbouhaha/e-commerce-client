@@ -1,0 +1,44 @@
+.products img{
+  height: 50px;
+  border-radius: 10px;
+}
+
+.products{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.price{
+  width: 20%;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price div{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.itemsNumber div {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.itemsNumber{
+  width: 20%;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info{
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+}
+

@@ -18,6 +18,8 @@ export class UserService {
 
   isAuthenticated : boolean
 
+  isVerified : boolean
+
   constructor(private http: HttpClient, private router: Router , private basketService : BasketService) { }
 
 
@@ -26,13 +28,14 @@ export class UserService {
            'http://localhost:3000/user/login',
            { email: email, password: password })
            .pipe(
-           catchError((err)=>{return throwError("err")}),
+           catchError((err)=>{return throwError(err)}),
              tap(
                (response)=> {
                  const user = new User(response.id,response.firstName,response.lastName,response.address,response.email,response.phoneNumber,response.role,response.verified)
                  this.user.next(user)
                  this.isAuthenticated=true
-                 console.log(response.basket)
+                 if (user.verified)
+                   this.isVerified=true
                  this.basketService.setBasket(response.basket)
                  if (user.role=="admin"){
                    this.isAdmin=true
@@ -67,8 +70,11 @@ export class UserService {
 
 
   logout() {
+    this.isVerified=false
+    this.isAdmin=false
+    this.isAuthenticated=false
     localStorage.removeItem('token');
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
     this.user.next(null);
     this.router.navigateByUrl('/user/login');
   }

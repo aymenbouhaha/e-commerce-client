@@ -7,6 +7,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {UserUpdateComponent} from "./user-update/user-update.component";
+import {SharedModule} from "../shared/shared.module";
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -15,14 +18,17 @@ import {UserUpdateComponent} from "./user-update/user-update.component";
     LoginComponent,
     SignUpComponent,
     UserUpdateComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    VerifyAccountComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        SharedModule,
+        MatButtonModule
+    ]
 })
 export class UserModule { }

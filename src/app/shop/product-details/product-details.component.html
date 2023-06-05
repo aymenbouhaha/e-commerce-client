@@ -2,13 +2,16 @@
   <app-loading-spinner></app-loading-spinner>
 </div>
 <div class="product" *ngIf="!productIsLoading">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="images">
     <div class="hero-image">
-      <img *ngIf="product.images.length>0" [src]="product.images[0] | image" alt="hero" class="hero">
+      <img *ngIf="product.images.length>0" [src]="heroImage | image" alt="hero" class="hero">
       <img *ngIf="product.images.length<0" src="assets/images/first.png" alt="hero" class="hero">
     </div>
     <div class="secondary-images" *ngIf="product.images.length>0">
-      <img *ngFor="let image of product.images;" [src]="image | image" alt="hero" class="secondary">
+      <img *ngFor="let image of product.images;" [src]="image | image" alt="hero" class="secondary" (click)="changeHeroImage(image)">
     </div>
   </div>
   <div class="product-infos">

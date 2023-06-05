@@ -1,8 +1,13 @@
-<div class="shop">
+<div class="loading" *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="shop" *ngIf="!loading">
+
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="shop-content">
-    <div class="paginator">
-      <div class="page-number" *ngFor="let i of range(1,items)">{{i}}</div>
-    </div>
     <div class="products">
       <app-product-item [product]="discount.product" *ngFor="let discount of discounts"></app-product-item>
     </div>

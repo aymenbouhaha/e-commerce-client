@@ -60,3 +60,7 @@
 .items:hover {
   background-color: bisque;
 }
+
+.icon{
+  height: 30px;
+}

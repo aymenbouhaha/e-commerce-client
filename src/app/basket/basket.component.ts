@@ -3,7 +3,7 @@ import {BasketService} from "./basket.service";
 import {Basket} from "../shared/models/basket/basket";
 import {OrderService} from "../order/order.service";
 import {BasketBackEndService} from "./basket-back-end.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-basket',
@@ -16,6 +16,7 @@ export class BasketComponent implements OnInit {
     private basketService: BasketService,
     private basketBackEndService : BasketBackEndService,
     private orderService : OrderService ,
+    private router : Router
   ) {
   }
 
@@ -24,6 +25,7 @@ export class BasketComponent implements OnInit {
   itemsCount = 0
 
   total : number = 0
+  errorMessage: string = null;
 
 
   ngOnInit(): void {
@@ -47,7 +49,6 @@ export class BasketComponent implements OnInit {
         total += (item.product.price) * item.itemsNumber
       }
     }
-    console.log(this.total)
     this.total=total
   }
 
@@ -56,9 +57,10 @@ export class BasketComponent implements OnInit {
       .subscribe(
       ()=>{
         this.basketService.removeFromBasket(productId)
+        this.errorMessage=null
       },
       error => {
-
+            this.errorMessage="An Error Occured While Trying To Remove The Item"
       }
     )
   }
@@ -73,8 +75,17 @@ export class BasketComponent implements OnInit {
           })
         }
         this.orderService.makeOrder(order)
+          .subscribe(
+            (success)=>{
+              this.errorMessage=null
+                this.router.navigate(["/order"])
+            },
+            error => {
+              this.errorMessage="An Error Occured When Trying To Make The Order"
+            }
+          )
     }else {
-      console.log("haha")
+      this.errorMessage="You Must Add Items To Your Basket"
     }
   }
 

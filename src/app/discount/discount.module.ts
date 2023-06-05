@@ -22,7 +22,7 @@ import {MatButtonModule} from "@angular/material/button";
         DiscountComponent
     ],
   imports: [
-    CommonModule, DiscountRoutingModule, MatFormFieldModule, MatDatepickerModule, ReactiveFormsModule, MatInputModule, SharedModule, MatButtonModule
+    CommonModule, DiscountRoutingModule, MatFormFieldModule, MatDatepickerModule, ReactiveFormsModule, MatInputModule, SharedModule, MatButtonModule, ShopModule
   ]
 })
 export class DiscountModule { }
