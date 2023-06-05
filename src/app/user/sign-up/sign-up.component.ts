@@ -36,13 +36,12 @@ export class SignUpComponent implements OnInit{
     }).subscribe(
       (resp)=>{
         this.router.navigate(["/login"])
-        this.isLoading=true
+        this.isLoading=false
         this.errorMessage=null
       },
       error => {
-        console.log(error)
-        this.isLoading=true
-        this.errorMessage="Sign Up Failed Would Please Retry"
+        this.isLoading=false
+        this.errorMessage=error.error.message.toString()
       }
     )
   }

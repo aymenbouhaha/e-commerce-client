@@ -24,10 +24,10 @@ export class VerifyAccountComponent implements OnInit {
     }
     this.verifyForm=new FormGroup(
       {
-        "1" : new FormControl(null,[Validators.required , Validators.min(1),Validators.max(9)]),
-        "2" : new FormControl(null,[Validators.required,Validators.min(1),Validators.max(9)]),
-        "3" : new FormControl(null,[Validators.required,Validators.min(1),Validators.max(9)]),
-        "4" : new FormControl(null,[Validators.required ,Validators.min(1),Validators.max(9)]),
+        "1" : new FormControl(null,[Validators.required , Validators.min(0),Validators.max(9)]),
+        "2" : new FormControl(null,[Validators.required,Validators.min(0),Validators.max(9)]),
+        "3" : new FormControl(null,[Validators.required,Validators.min(0),Validators.max(9)]),
+        "4" : new FormControl(null,[Validators.required ,Validators.min(0),Validators.max(9)]),
       }
     )
   }
@@ -39,11 +39,13 @@ export class VerifyAccountComponent implements OnInit {
       const thirdNumer=this.verifyForm.get("3").value
       const fourthNumer=this.verifyForm.get("4").value
       const code : string=`${firstNumer}${secondNumer}${thirdNumer}${fourthNumer}`
+      console.log(code)
       this.userService.verifyAccount(code)
         .subscribe(
           (resp)=>{
             console.log(resp)
             this.errorMessage=null
+            this.userService.isVerified=true
             this.router.navigate(["/shop"])
           },
           error => {
