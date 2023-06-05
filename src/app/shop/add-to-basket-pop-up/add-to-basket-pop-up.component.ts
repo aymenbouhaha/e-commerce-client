@@ -27,7 +27,7 @@ export class AddToBasketPopUpComponent implements OnInit {
     this.product=this.data
     this.addToBasketForm=new FormGroup(
       {
-        itemsNumber :new FormControl(1,[Validators.required,Validators.min(1)])
+        itemsNumber :new FormControl(null,[Validators.required,Validators.min(1)])
       }
     )
   }
@@ -36,14 +36,20 @@ export class AddToBasketPopUpComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = null;
 
+  onClose(){
+    this.dialogRef.close()
+  }
+
 
   onSubmit(){
     this.isLoading=true
     if (this.addToBasketForm.valid){
+      console.log("From Dialog Basket"+this.addToBasketForm.get("itemsNumber").value)
       this.basketBackService.addToBasket(this.product,this.addToBasketForm.get("itemsNumber").value)
         .subscribe(
           (res)=>{
                 this.isLoading=false
+            this.dialogRef.close()
                 this.router.navigate(["/basket"])
           },
           error => {

@@ -21,9 +21,11 @@ export class VerifiedGuard implements CanActivate {
           if (user){
             if (user.verified){
               return true
+            }else {
+              return this.router.createUrlTree(["/user/verify"]);
             }
           }else {
-            return this.router.createUrlTree(["/user/verify"]);
+            return this.router.createUrlTree(["/user/login"]);
           }
         }
       )

@@ -34,8 +34,8 @@ import {MatButtonModule} from "@angular/material/button";
         SharedModule,
       MatFormFieldModule,
       MatInputModule,  MatButtonModule,
-      DiscountModule,
       MatDialogModule,
+      // DiscountModule,
       MatPaginatorModule,
       ReactiveFormsModule
     ]

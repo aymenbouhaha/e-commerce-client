@@ -6,11 +6,12 @@ import {ProductDetailsComponent} from "./product-details/product-details.compone
 import {AddProductComponent} from "./add-product/add-product.component";
 import {AuthGuard} from "../user/guard/auth.guard";
 import {AdminGuard} from "../user/guard/admin.guard";
+import {VerifiedGuard} from "../user/guard/verified.guard";
 
 
 const routes: Routes=[
   {path : "", component: ShopComponent },
-  {path : "product/add", component: AddProductComponent , canActivate:[AuthGuard,AdminGuard]},
+  {path : "product/add", component: AddProductComponent , canActivate:[AuthGuard,AdminGuard, VerifiedGuard]},
   {path : "product/:id", component: ProductDetailsComponent} ,
 
 ]

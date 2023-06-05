@@ -24,6 +24,10 @@
       <img src="assets/images/login.svg" class="icon">
       <p class="right-item-text text hover">Sign Up</p>
     </div>
+    <div class="items basket links" routerLink="/shop/product/add" *ngIf="isAuthenticated && isAdmin">
+      <img src="assets/images/add.svg" class="icon">
+      <p class="right-item-text text hover">Add Product</p>
+    </div>
     <div class="items basket links" (click)="logout()" *ngIf="isAuthenticated">
       <img src="assets/images/logout.svg" class="icon">
       <p class="right-item-text text hover">Logout</p>

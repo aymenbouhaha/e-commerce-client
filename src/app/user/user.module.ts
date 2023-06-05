@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {UserUpdateComponent} from "./user-update/user-update.component";
 import {SharedModule} from "../shared/shared.module";
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -16,7 +18,8 @@ import {SharedModule} from "../shared/shared.module";
     LoginComponent,
     SignUpComponent,
     UserUpdateComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    VerifyAccountComponent
   ],
     imports: [
         CommonModule,
@@ -24,7 +27,8 @@ import {SharedModule} from "../shared/shared.module";
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        SharedModule
+        SharedModule,
+        MatButtonModule
     ]
 })
 export class UserModule { }

@@ -1,24 +1,144 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-hover" style="cursor: pointer;">
-        <thead class="thead-light">
-        <tr>
-          <th>Order</th>
-          <th>Date</th>
-          <th>Total</th>
-          <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let order of orders" routerLink="/orders/{{order.id}}">
-          <th># {{order.id}}</th>
-          <td>{{order.date | date: 'medium'}}</td>
-          <td>{{order.total | currency}}</td>
-          <td>{{order.state}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+<br>
+<div class="loading" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="container" *ngIf="!isLoading">
+  <div *ngIf="admin ">
+    <mat-expansion-panel *ngFor="let order of orders"   >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Order ID</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.id}}
+        </mat-panel-title>
+        <!-- -->
+        <mat-panel-title>
+          <b>User</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.client.firstName + ' ' + order.client.lastName}}
+        </mat-panel-title>
+        <!-- -->
+        <mat-panel-title>
+          <b>Status</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.status}}
+        </mat-panel-title>
+
+        <!-- -->
+        <mat-panel-title>
+          <b>Total</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{totalCost(order)}}
+        </mat-panel-title>
+
+        <!-- -->
+        <mat-panel-title>
+          <b>Date</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.date | date:'medium'}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list  *ngFor="let product of order.orderProducts">
+        <mat-list-item>
+          <div class="products">
+            <div class="info">{{product.product.name}}</div>
+            <div class="price">
+              <div class="info">Price: </div>
+              <div>
+                {{product.product.price}}
+              </div>
+            </div>
+            <div class="itemsNumber">
+              <div class="info">Number Of Items Ordered:</div>
+              <div>{{product.itemsNumber}}</div>
+            </div>
+            <div class="image-container" (click)="navigateToProductDetails(product.product)">
+              <img *ngIf="product.product.images.length>0"
+                   [src]="product.product.images[0] | image"
+                   alt="">
+              <img *ngIf="product.product.images.length<=0" src="assets/images/first.png" alt="">
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
   </div>
+
+  <div *ngIf="!admin ">
+    <mat-expansion-panel *ngFor="let order of orders"   >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Order ID</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.id}}
+        </mat-panel-title>
+
+        <!-- -->
+        <mat-panel-title>
+          <b>Status</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.status}}
+        </mat-panel-title>
+
+        <!-- -->
+        <mat-panel-title>
+          <b>Total</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{totalCost(order)}}
+        </mat-panel-title>
+
+        <!-- -->
+        <mat-panel-title>
+          <b>Date</b>
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{order.date | date:'medium'}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list  *ngFor="let product of order.orderProducts">
+        <mat-list-item>
+          <div class="products">
+            <div class="info">{{product.product.name}}</div>
+            <div class="price">
+              <div class="info">Price: </div>
+              <div>
+                {{product.product.price}}
+              </div>
+            </div>
+            <div class="itemsNumber">
+              <div class="info">Number Of Items Ordered:</div>
+              <div>{{product.itemsNumber}}</div>
+            </div>
+            <div class="image-container" (click)="navigateToProductDetails(product.product)">
+              <img *ngIf="product.product.images.length>0"
+                   [src]="product.product.images[0] | image"
+                   alt="">
+              <img *ngIf="product.product.images.length<=0" src="assets/images/first.png" alt="">
+            </div>
+          </div>        </mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+
+  </div>
+
 </div>

@@ -9,15 +9,16 @@
     <div class="name-price">
       <div class="name">{{product.name}}</div>
       <div class="price-price-after-discount">
-        <div class="price">{{product.price}}TND<span class="price-after-discount">-23TND</span></div>
+        <div class="price" *ngIf="!product.discount">{{product.price}}TND</div>
+        <div class="price" *ngIf="product.discount"><div class="discounted">{{product.price}}TND</div><span class="price-after-discount">-{{product.price*(1-product.discount.value/100) | number : "1.1-3"}}TND</span></div>
       </div>
     </div>
     <div class="descrption">
       {{product.description}}
     </div>
     <div class="product-card-footer">
-      <div class="add-to-cart" (click)="addToBasket()">Ajouter Au Panier</div>
-<!--      <div class="add-to-cart" (click)="makeDiscount()">Make Discount</div>-->
+      <div class="add-to-cart" (click)="addToBasket()" *ngIf="!isAdmin">Ajouter Au Panier</div>
+      <div class="add-to-cart" (click)="makeDiscount()" *ngIf="isAdmin">Make Discount</div>
       <div class="discount" *ngIf="product.discount!=null">{{product.discount.value}}%</div>
     </div>
   </div>

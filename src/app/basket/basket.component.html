@@ -1,6 +1,8 @@
 <section class="padding-y bg-light mt-5">
   <div class="container">
-
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
     <div class="row">
       <div class="col-lg-7">
         <div class="d-flex justify-content-between align-items-center mb-4">

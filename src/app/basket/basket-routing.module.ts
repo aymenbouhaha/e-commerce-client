@@ -4,10 +4,11 @@ import {RouterModule, Routes} from "@angular/router";
 import {BasketComponent} from "./basket.component";
 import {AuthGuard} from "../user/guard/auth.guard";
 import {NotAdminGuard} from "../user/guard/not-admin.guard";
+import {VerifiedGuard} from "../user/guard/verified.guard";
 
 
 const routes : Routes=[
-  {path : "", component: BasketComponent , canActivate: [AuthGuard, NotAdminGuard]}
+  {path : "", component: BasketComponent , canActivate: [AuthGuard, VerifiedGuard ,NotAdminGuard]}
 ]
 
 @NgModule({

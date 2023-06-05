@@ -1,0 +1,16 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<form class="mt-5" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <h2>Verify Your Account</h2>
+    <p>We emailed you the four digit code to fantacydesignss@gmail.com <br/> Enter the code below to confirm your email address.</p>
+    <div class="code-container">
+      <input type="number" class="code" placeholder="0" min="0" max="9" required formControlName="1">
+      <input type="number" class="code" placeholder="0" min="0" max="9" required formControlName="2">
+      <input type="number" class="code" placeholder="0" min="0" max="9" required formControlName="3">
+      <input type="number" class="code" placeholder="0" min="0" max="9" required formControlName="4">
+    </div>
+    <button mat-raised-button color="primary" type="submit">Verify Your Email</button>
+  </div>
+</form>

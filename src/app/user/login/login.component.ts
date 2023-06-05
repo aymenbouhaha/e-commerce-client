@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
     this.userService.login(email,password).
       subscribe(
     (response)=>{
-      this.router.navigate(['/shop'])
+      this.router.navigate(['/user/verify'])
       this.errorMessage=null
       this.isLoading=false
     },
